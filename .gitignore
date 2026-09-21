@@ -1,0 +1,34 @@
+# Environments and caches
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Data, checkpoints, big caches (keep small JSON/CSV results)
+# /data/ is anchored to the repo root so it does NOT also match task1/data/
+# (real source code lives there). gitignore has no inline comments -- a "# ..."
+# after a pattern on the same line becomes part of the pattern itself and
+# silently stops it from matching anything.
+/data/
+checkpoints/
+*.pt
+*.pth
+wandb/
+logs/
+task1/cache/
+
+# Assignment handout
+ATML-PA1.pdf
+
+# LaTeX build artifacts (report/*.tex + report/*.sty are the real source)
+report/*.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg

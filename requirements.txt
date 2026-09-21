@@ -1,0 +1,15 @@
+# Python 3.12. Local: `uv venv --python 3.12 .venv && uv pip install -r requirements.txt`
+# Kaggle already ships torch/torchvision with CUDA; `pip install -r requirements.txt` there only adds the rest.
+torch>=2.4
+torchvision>=0.19
+open_clip_torch>=2.26
+numpy
+scipy
+scikit-learn
+pandas
+matplotlib
+pyyaml
+tqdm
+pillow
+umap-learn
+pyarrow  # only for shared/download_pacs.py

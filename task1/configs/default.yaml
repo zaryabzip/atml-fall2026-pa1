@@ -1,0 +1,29 @@
+seed: 6304
+device: auto
+dataset: stl10               # stl10 or oxford_pets
+data:
+  val_fraction: 0.2
+  eval_subset_size: 500      # class-balanced official test images
+backbones: [resnet50, vit_b16, clip_b32]
+feature_batch: 64            # lower to 32 on a 16 GB Mac if ViT runs out of memory
+head:
+  max_epochs: 50
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  patience: 5                # epochs without better val accuracy
+  batch_size: 256
+clip_zero_shot:
+  template: "a photo of a {}."
+interventions:
+  extra_color: {kind: hue_rotation, hue_factor: 0.3}   # design choice: rotates hue, keeps shape/luminance/saturation
+  translations: [0, 8, 16, 32]
+  patch_grid: 4
+cue_conflict:
+  class_pairs: [[cat, truck], [dog, airplane], [bird, car], [horse, ship], [monkey, deer]]
+  min_valid: 200
+  style_strength: 0.75       # AdaIN alpha: 0.5 was too subtle, 1.0 erased shape on cluttered photos; 0.75 balances both
+representation:
+  method: tsne               # tsne | umap
+  tsne_perplexity: 30
+  umap_neighbors: 15
+  umap_min_dist: 0.1

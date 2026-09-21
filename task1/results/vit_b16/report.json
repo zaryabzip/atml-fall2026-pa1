@@ -1,0 +1,182 @@
+{
+  "backbone": "vit_b16",
+  "head_training_history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.4296956462860106,
+      "val_accuracy": 0.931
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4554177417755127,
+      "val_accuracy": 0.962
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.23252606201171874,
+      "val_accuracy": 0.97
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.16177953243255616,
+      "val_accuracy": 0.971
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.12789642107486726,
+      "val_accuracy": 0.971
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.10654422485828399,
+      "val_accuracy": 0.971
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.09140745264291764,
+      "val_accuracy": 0.973
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.07980082046985626,
+      "val_accuracy": 0.973
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.0705425735116005,
+      "val_accuracy": 0.974
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.06295420384407044,
+      "val_accuracy": 0.974
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.05656682139635086,
+      "val_accuracy": 0.975
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.05140960639715195,
+      "val_accuracy": 0.974
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.04658155035972595,
+      "val_accuracy": 0.976
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.042520549952983856,
+      "val_accuracy": 0.977
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.03917555049061775,
+      "val_accuracy": 0.976
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.036001162379980085,
+      "val_accuracy": 0.977
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.033273655086755755,
+      "val_accuracy": 0.977
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.030817722618579863,
+      "val_accuracy": 0.977
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.02874300503730774,
+      "val_accuracy": 0.977
+    }
+  ],
+  "clean": {
+    "accuracy": 0.974,
+    "macro_f1": 0.9740099834691731,
+    "mean_max_confidence": 0.9541383981704712,
+    "prediction_consistency": null,
+    "accuracy_change_vs_clean": null
+  },
+  "grayscale": {
+    "accuracy": 0.964,
+    "macro_f1": 0.9640401020616698,
+    "mean_max_confidence": 0.9410846829414368,
+    "prediction_consistency": 0.97,
+    "accuracy_change_vs_clean": -0.010000000000000009
+  },
+  "extra_color": {
+    "accuracy": 0.948,
+    "macro_f1": 0.9479804619216452,
+    "mean_max_confidence": 0.9207938313484192,
+    "prediction_consistency": 0.96,
+    "accuracy_change_vs_clean": -0.026000000000000023
+  },
+  "patch_shuffle": {
+    "accuracy": 0.91,
+    "macro_f1": 0.9095292084164992,
+    "mean_max_confidence": 0.8788468241691589,
+    "prediction_consistency": 0.918,
+    "accuracy_change_vs_clean": -0.06399999999999995
+  },
+  "translation_curve": [
+    {
+      "shift_px": 0,
+      "accuracy": 0.974,
+      "n_directions": 1
+    },
+    {
+      "shift_px": 8,
+      "accuracy": 0.9735,
+      "per_direction_accuracy": [
+        0.974,
+        0.976,
+        0.97,
+        0.974
+      ]
+    },
+    {
+      "shift_px": 16,
+      "accuracy": 0.9704999999999999,
+      "per_direction_accuracy": [
+        0.97,
+        0.974,
+        0.968,
+        0.97
+      ]
+    },
+    {
+      "shift_px": 32,
+      "accuracy": 0.968,
+      "per_direction_accuracy": [
+        0.97,
+        0.976,
+        0.964,
+        0.962
+      ]
+    }
+  ],
+  "cue_conflict": {
+    "n_shape": 221,
+    "n_texture": 7,
+    "n_other": 71,
+    "n_total": 299,
+    "shape_bias": 96.9298245614035,
+    "coverage": 76.25418060200668,
+    "mean_max_confidence": 0.7713262438774109,
+    "cosine_stability_vs_content_source": 0.4072416356549192
+  },
+  "cosine_stability": {
+    "grayscale": 0.7439744622491908,
+    "extra_color": 0.711155698689375,
+    "patch_shuffle": 0.6641083097185191,
+    "translation": 0.9436020569980857,
+    "cue_conflict": 0.4072416356549192
+  }
+}
