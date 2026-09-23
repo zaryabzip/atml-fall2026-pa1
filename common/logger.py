@@ -18,4 +18,4 @@ class JsonlLogger:
         with open(self.path, "a") as f:
             f.write(json.dumps(record, default=_to_builtin) + "\n")
         if echo:
-            print(" ".join(f"{k}={v:.4g}" if isinstance(v, float) else f"{k}={v}" for k, v in record.items()))
+            print(" ".join(f"{k}={v:.4g}" if isinstance(v, float) else f"{k}={v}" for k, v in record.items()), flush=True)

@@ -1,0 +1,7 @@
+_base_: base.yaml
+run_name: dan
+method:
+  name: dan
+  lambda_mmd: 1.0
+  kernel_multipliers: [0.5, 1.0, 2.0]
+  mmd_unbiased: true      # shared/mmd.py explains why (biased estimator collapsed DAN-DG at lambda = 1)

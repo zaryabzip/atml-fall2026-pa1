@@ -1,0 +1,9 @@
+_base_: base.yaml
+run_name: cdan
+method:
+  name: cdan
+  max_grl: 1.0
+  grl_gamma: 10.0
+  domain_loss_weight: 1.0
+  disc_hidden: 256
+  disc_dropout: 0.5

@@ -1,0 +1,20 @@
+# Shared Task 2 / Task 3 protocol (values from the PDF). Write floats as 1.0e-4, not 1e-4 (YAML quirk).
+seed: 6304
+device: auto              # auto -> cuda, then mps, then cpu
+run_name: source_only
+data:
+  pacs_root: null         # null -> $PA1_DATA_ROOT/pacs
+train:
+  max_epochs: 30
+  patience: 5             # epochs without better mean source-val macro-F1
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  per_domain_batch: 8     # x3 source domains = 24 source images per step
+  target_batch: 24        # Task 2 adaptation methods only
+  eval_batch: 128
+  steps_per_epoch: auto   # auto = pooled source train images // 24
+  amp: true               # fp16 on CUDA (T4); ignored on MPS/CPU
+  data_parallel: false    # prefer one run per GPU instead
+  num_workers_per_loader: null  # null -> CPU budget split across loaders
+method:
+  name: source_only
