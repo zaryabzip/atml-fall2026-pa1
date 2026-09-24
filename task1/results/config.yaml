@@ -30,15 +30,16 @@ interventions:
 cue_conflict:
   class_pairs:
   - - cat
-    - truck
-  - - dog
-    - airplane
-  - - bird
     - car
-  - - horse
-    - ship
+  - - bird
+    - dog
+  - - airplane
+    - horse
+  - - deer
+    - truck
   - - monkey
-    - deer
+    - ship
+  candidates_per_direction: 40
   min_valid: 200
   style_strength: 0.75
 representation:

@@ -42,7 +42,7 @@ OUT_DIR = PROJECT_ROOT / "task1" / "data" / "cue_conflicts"  # accepted images +
 IMAGES_DIR = OUT_DIR / "images"
 METADATA_PATH = OUT_DIR / "metadata.json"
 
-CANDIDATES_PER_DIRECTION = 30  # content/style samples tried per (content_class, style_class) direction
+CANDIDATES_PER_DIRECTION = 30  # default; configs/default.yaml cue_conflict.candidates_per_direction overrides it
 
 MAX_CLIPPED_FRACTION = 0.5  # reject if over half the raw pixels fall outside [0, 1]: decoder blew up
 MIN_OUTPUT_STD = 0.02  # reject if the finished image is almost perfectly flat/blank
@@ -246,6 +246,7 @@ def main():
     class_pairs = cfg["cue_conflict"]["class_pairs"]
     alpha = cfg["cue_conflict"]["style_strength"]
     min_valid = cfg["cue_conflict"]["min_valid"]
+    per_direction = cfg["cue_conflict"].get("candidates_per_direction", CANDIDATES_PER_DIRECTION)
     seed = cfg["seed"]
     if len(class_pairs) < 5:
         raise ValueError(f"Need >= 5 class pairs in configs/default.yaml, got {len(class_pairs)}.")
@@ -265,10 +266,10 @@ def main():
     for content_class, style_class in _directions_from_pairs(class_pairs):
         content_pool = class_to_indices[content_class]
         style_pool = class_to_indices[style_class]
-        content_ids = rng.choice(content_pool, size=CANDIDATES_PER_DIRECTION, replace=False)
-        style_ids = rng.choice(style_pool, size=CANDIDATES_PER_DIRECTION, replace=True)
+        content_ids = rng.choice(content_pool, size=per_direction, replace=False)
+        style_ids = rng.choice(style_pool, size=per_direction, replace=True)
 
-        for candidate_i in range(CANDIDATES_PER_DIRECTION):
+        for candidate_i in range(per_direction):
             content_id, style_id = int(content_ids[candidate_i]), int(style_ids[candidate_i])
             content_img, _ = dataset[content_id]
             style_img, _ = dataset[style_id]
@@ -306,7 +307,7 @@ def main():
     print(f"Saved metadata to {METADATA_PATH}")
     if accepted_count < min_valid:
         print(f"WARNING: only {accepted_count} accepted, need >= {min_valid}. "
-              f"Raise CANDIDATES_PER_DIRECTION in this script and re-run.")
+              f"Raise cue_conflict.candidates_per_direction in the config and re-run.")
 
 
 if __name__ == "__main__":

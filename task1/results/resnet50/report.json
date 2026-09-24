@@ -143,20 +143,20 @@
     }
   ],
   "cue_conflict": {
-    "n_shape": 172,
-    "n_texture": 26,
-    "n_other": 101,
-    "n_total": 299,
-    "shape_bias": 86.86868686868686,
-    "coverage": 66.22073578595318,
-    "mean_max_confidence": 0.7417076230049133,
-    "cosine_stability_vs_content_source": 0.39757482044618453
+    "n_shape": 139,
+    "n_texture": 17,
+    "n_other": 64,
+    "n_total": 220,
+    "shape_bias": 89.1025641025641,
+    "coverage": 70.9090909090909,
+    "mean_max_confidence": 0.6892483830451965,
+    "cosine_stability_vs_content_source": 0.39140163710129267
   },
   "cosine_stability": {
     "grayscale": 0.7897498611143553,
     "extra_color": 0.758054795686208,
     "patch_shuffle": 0.7222442464549902,
     "translation": 0.9342979733526918,
-    "cue_conflict": 0.39757482044618453
+    "cue_conflict": 0.39140163710129267
   }
 }

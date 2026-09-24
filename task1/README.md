@@ -12,6 +12,7 @@ Which visual cues (shape, texture, color, position) do ResNet-50, ViT-B/16 and C
 ```bash
 python -m task1.data.make_subset          # once: splits + eval subset ids
 python -m task1.data.make_cue_conflicts   # once: cue-conflict images
+python -m task1.data.topup_cue_conflicts  # once: extra candidates for the weakest directions
 python -m task1.scripts.run_task1 --config task1/configs/default.yaml
 ```
 Runs fine on a 16 GB M4 (MPS). If ViT runs out of memory, lower `feature_batch`.
@@ -33,7 +34,7 @@ Runs fine on a 16 GB M4 (MPS). If ViT runs out of memory, lower `feature_batch`.
 
 ## Design choices
 - Extra color change: hue rotation (`hue_factor` 0.3).
-- Cue conflicts: 5 class pairs (cat/truck, dog/airplane, bird/car, horse/ship, monkey/deer), both directions, AdaIN style strength 0.75, 30 candidates per direction. Bad stylizations are rejected by a fixed rule on the image itself (never on model predictions), documented at the top of `data/make_cue_conflicts.py`.
+- Cue conflicts: 5 class pairs covering all 10 classes (cat/car, bird/dog, airplane/horse, deer/truck, monkey/ship), both directions, AdaIN style strength 0.75, 40 candidates per direction plus a top-up for the three weakest directions (`data/topup_cue_conflicts.py`). Images are rejected by a technical rule (top of `data/make_cue_conflicts.py`) and by eye if the shape class is not clearly recognizable or the style barely changed; model predictions are never used. The kept set is balanced to 22 per direction (220 images). Per-image decisions are in `data/cue_conflicts/metadata.json`.
 - Representation plots: t-SNE, perplexity 30, seed 6304, one joint projection per backbone.
 
 ## Outputs (`results/`)

@@ -19,7 +19,8 @@ interventions:
   translations: [0, 8, 16, 32]
   patch_grid: 4
 cue_conflict:
-  class_pairs: [[cat, truck], [dog, airplane], [bird, car], [horse, ship], [monkey, deer]]
+  class_pairs: [[cat, car], [bird, dog], [airplane, horse], [deer, truck], [monkey, ship]]  # all 10 classes once; chosen from model-free previews
+  candidates_per_direction: 40  # 400 candidates, so >= 200 remain after the visual check
   min_valid: 200
   style_strength: 0.75       # AdaIN alpha: 0.5 was too subtle, 1.0 erased shape on cluttered photos; 0.75 balances both
 representation:
