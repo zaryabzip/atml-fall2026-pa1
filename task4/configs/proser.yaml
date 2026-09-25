@@ -1,0 +1,12 @@
+_base_: vanilla.yaml
+run_name: proser
+method:
+  name: proser
+  init_from: vanilla      # checkpoints/task4/vanilla/best.pt
+  num_dummy: 5
+  beta: 1.0               # classifier-placeholder loss weight
+  gamma: 0.1              # data-placeholder loss weight
+  mixup_beta: 2.0         # lambda ~ Beta(2, 2), mixed after layer2
+train:
+  epochs: 50
+  lr: 1.0e-3

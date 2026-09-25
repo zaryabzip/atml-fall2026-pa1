@@ -1,0 +1,19 @@
+seed: 6304
+device: auto
+run_name: vanilla
+method:
+  name: vanilla
+train:
+  epochs: 100
+  batch_size: 128
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 5.0e-4    # cosine decay over all epochs
+  randaugment: false
+  drop_last: true         # same for every model; PROSER needs even batches
+  eval_batch: 512
+  amp: true               # fp16 on CUDA (T4); ignored on MPS/CPU
+  data_parallel: false    # prefer one run per GPU
+  num_workers: null
+  resume: true            # continue from checkpoints/task4/<run>/last.pt if it exists
+  max_steps: null         # preflight only

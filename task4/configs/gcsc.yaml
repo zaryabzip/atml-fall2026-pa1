@@ -1,0 +1,7 @@
+# Exactly the vanilla recipe + RandAugment(num_ops=2, magnitude=9) after crop/flip.
+_base_: vanilla.yaml
+run_name: gcsc
+method:
+  name: gcsc
+train:
+  randaugment: true

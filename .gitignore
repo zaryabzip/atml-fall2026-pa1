@@ -32,3 +32,4 @@ report/*.pdf
 *.synctex.gz
 *.bbl
 *.blg
+task4/cache/

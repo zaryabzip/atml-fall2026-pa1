@@ -1,0 +1,280 @@
+{
+  "threshold_mls_vanilla": -5.876927852630615,
+  "failures": {
+    "near": [
+      {
+        "index": 614,
+        "unknown_class": "pickup_truck",
+        "predicted_class": "automobile",
+        "score": -11.949934005737305,
+        "threshold": -5.876927852630615,
+        "kind": "semantically plausible"
+      },
+      {
+        "index": 562,
+        "unknown_class": "bus",
+        "predicted_class": "truck",
+        "score": -11.688214302062988,
+        "threshold": -5.876927852630615,
+        "kind": "semantically plausible"
+      },
+      {
+        "index": 75,
+        "unknown_class": "fox",
+        "predicted_class": "dog",
+        "score": -11.023747444152832,
+        "threshold": -5.876927852630615,
+        "kind": "semantically plausible"
+      },
+      {
+        "index": 391,
+        "unknown_class": "wolf",
+        "predicted_class": "dog",
+        "score": -11.015162467956543,
+        "threshold": -5.876927852630615,
+        "kind": "semantically plausible"
+      },
+      {
+        "index": 743,
+        "unknown_class": "leopard",
+        "predicted_class": "frog",
+        "score": -10.997920036315918,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      },
+      {
+        "index": 216,
+        "unknown_class": "camel",
+        "predicted_class": "dog",
+        "score": -10.77200984954834,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      }
+    ],
+    "far": [
+      {
+        "index": 322,
+        "unknown_class": "bottle",
+        "predicted_class": "cat",
+        "score": -11.794392585754395,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      },
+      {
+        "index": 146,
+        "unknown_class": "chair",
+        "predicted_class": "cat",
+        "score": -11.777552604675293,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      },
+      {
+        "index": 562,
+        "unknown_class": "clock",
+        "predicted_class": "bird",
+        "score": -11.543354988098145,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      },
+      {
+        "index": 352,
+        "unknown_class": "bowl",
+        "predicted_class": "cat",
+        "score": -11.05435562133789,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      },
+      {
+        "index": 286,
+        "unknown_class": "sunflower",
+        "predicted_class": "cat",
+        "score": -10.878118515014648,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      },
+      {
+        "index": 791,
+        "unknown_class": "mushroom",
+        "predicted_class": "bird",
+        "score": -10.776931762695312,
+        "threshold": -5.876927852630615,
+        "kind": "surprising"
+      }
+    ]
+  },
+  "per_class": {
+    "near": {
+      "bus": {
+        "accepted_rate": 0.84,
+        "absorbed_by": {
+          "truck": 70,
+          "automobile": 12,
+          "airplane": 1,
+          "ship": 1
+        }
+      },
+      "camel": {
+        "accepted_rate": 0.57,
+        "absorbed_by": {
+          "deer": 13,
+          "dog": 13,
+          "horse": 13,
+          "bird": 10,
+          "airplane": 3,
+          "cat": 3,
+          "frog": 2
+        }
+      },
+      "fox": {
+        "accepted_rate": 0.71,
+        "absorbed_by": {
+          "cat": 29,
+          "deer": 21,
+          "dog": 15,
+          "horse": 4,
+          "bird": 1,
+          "frog": 1
+        }
+      },
+      "leopard": {
+        "accepted_rate": 0.57,
+        "absorbed_by": {
+          "frog": 27,
+          "cat": 21,
+          "deer": 5,
+          "dog": 3,
+          "bird": 1
+        }
+      },
+      "motorcycle": {
+        "accepted_rate": 0.32,
+        "absorbed_by": {
+          "automobile": 17,
+          "truck": 8,
+          "airplane": 4,
+          "cat": 3
+        }
+      },
+      "pickup_truck": {
+        "accepted_rate": 0.87,
+        "absorbed_by": {
+          "automobile": 54,
+          "truck": 33
+        }
+      },
+      "tractor": {
+        "accepted_rate": 0.62,
+        "absorbed_by": {
+          "truck": 52,
+          "ship": 6,
+          "automobile": 3,
+          "airplane": 1
+        }
+      },
+      "wolf": {
+        "accepted_rate": 0.75,
+        "absorbed_by": {
+          "dog": 36,
+          "cat": 32,
+          "deer": 4,
+          "horse": 2,
+          "bird": 1
+        }
+      }
+    },
+    "far": {
+      "bottle": {
+        "accepted_rate": 0.45,
+        "absorbed_by": {
+          "cat": 18,
+          "ship": 12,
+          "truck": 9,
+          "bird": 2,
+          "dog": 2,
+          "airplane": 1,
+          "frog": 1
+        }
+      },
+      "bowl": {
+        "accepted_rate": 0.47,
+        "absorbed_by": {
+          "cat": 17,
+          "ship": 8,
+          "frog": 7,
+          "automobile": 6,
+          "bird": 5,
+          "dog": 2,
+          "airplane": 1,
+          "truck": 1
+        }
+      },
+      "chair": {
+        "accepted_rate": 0.46,
+        "absorbed_by": {
+          "airplane": 28,
+          "cat": 7,
+          "truck": 6,
+          "bird": 5
+        }
+      },
+      "clock": {
+        "accepted_rate": 0.47,
+        "absorbed_by": {
+          "cat": 14,
+          "automobile": 10,
+          "ship": 10,
+          "bird": 5,
+          "truck": 5,
+          "airplane": 1,
+          "dog": 1,
+          "frog": 1
+        }
+      },
+      "keyboard": {
+        "accepted_rate": 0.43,
+        "absorbed_by": {
+          "truck": 9,
+          "airplane": 7,
+          "cat": 7,
+          "frog": 7,
+          "bird": 5,
+          "automobile": 2,
+          "dog": 2,
+          "horse": 2,
+          "deer": 1,
+          "ship": 1
+        }
+      },
+      "mushroom": {
+        "accepted_rate": 0.49,
+        "absorbed_by": {
+          "bird": 18,
+          "frog": 13,
+          "cat": 9,
+          "dog": 4,
+          "deer": 3,
+          "airplane": 2
+        }
+      },
+      "sunflower": {
+        "accepted_rate": 0.56,
+        "absorbed_by": {
+          "bird": 33,
+          "frog": 13,
+          "dog": 5,
+          "cat": 2,
+          "truck": 2,
+          "airplane": 1
+        }
+      },
+      "wardrobe": {
+        "accepted_rate": 0.77,
+        "absorbed_by": {
+          "cat": 41,
+          "truck": 35,
+          "bird": 1
+        }
+      }
+    }
+  }
+}

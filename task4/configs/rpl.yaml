@@ -1,0 +1,5 @@
+# Optional extension.
+_base_: vanilla.yaml
+run_name: rpl
+method:
+  name: rpl               # optional extension, not implemented

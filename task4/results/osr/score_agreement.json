@@ -1,0 +1,196 @@
+{
+  "rank_correlation": {
+    "test": {
+      "MSP vs MLS": 0.9473282497823676,
+      "MSP vs Energy": 0.9465564683579134,
+      "MSP vs Mahalanobis": 0.571196808269341,
+      "MLS vs Energy": 0.9999372604683683,
+      "MLS vs Mahalanobis": 0.4151002857044371,
+      "Energy vs Mahalanobis": 0.4138492722396666
+    },
+    "near": {
+      "MSP vs MLS": 0.9424604898354947,
+      "MSP vs Energy": 0.9203538770393814,
+      "MSP vs Mahalanobis": 0.9580476236567224,
+      "MLS vs Energy": 0.9971446283509819,
+      "MLS vs Mahalanobis": 0.8991781159033062,
+      "Energy vs Mahalanobis": 0.8807074620429094
+    },
+    "far": {
+      "MSP vs MLS": 0.9075000756300013,
+      "MSP vs Energy": 0.870908479178728,
+      "MSP vs Mahalanobis": 0.8762891165237511,
+      "MLS vs Energy": 0.9956612900957659,
+      "MLS vs Mahalanobis": 0.7342089597014997,
+      "Energy vs Mahalanobis": 0.6981130439266313
+    }
+  },
+  "decisions": {
+    "near": {
+      "MSP vs MLS": {
+        "same_call": 0.87,
+        "only_MSP_rejects": 0.0525,
+        "only_MLS_rejects": 0.0775
+      },
+      "MSP vs Energy": {
+        "same_call": 0.84625,
+        "only_MSP_rejects": 0.05875,
+        "only_Energy_rejects": 0.095
+      },
+      "MSP vs Mahalanobis": {
+        "same_call": 0.91125,
+        "only_MSP_rejects": 0.0575,
+        "only_Mahalanobis_rejects": 0.03125
+      },
+      "MLS vs Energy": {
+        "same_call": 0.97625,
+        "only_MLS_rejects": 0.00625,
+        "only_Energy_rejects": 0.0175
+      },
+      "MLS vs Mahalanobis": {
+        "same_call": 0.84625,
+        "only_MLS_rejects": 0.1025,
+        "only_Mahalanobis_rejects": 0.05125
+      },
+      "Energy vs Mahalanobis": {
+        "same_call": 0.825,
+        "only_Energy_rejects": 0.11875,
+        "only_Mahalanobis_rejects": 0.05625
+      }
+    },
+    "far": {
+      "MSP vs MLS": {
+        "same_call": 0.85125,
+        "only_MSP_rejects": 0.0525,
+        "only_MLS_rejects": 0.09625
+      },
+      "MSP vs Energy": {
+        "same_call": 0.82625,
+        "only_MSP_rejects": 0.05875,
+        "only_Energy_rejects": 0.115
+      },
+      "MSP vs Mahalanobis": {
+        "same_call": 0.875,
+        "only_MSP_rejects": 0.02,
+        "only_Mahalanobis_rejects": 0.105
+      },
+      "MLS vs Energy": {
+        "same_call": 0.97,
+        "only_MLS_rejects": 0.00875,
+        "only_Energy_rejects": 0.02125
+      },
+      "MLS vs Mahalanobis": {
+        "same_call": 0.78875,
+        "only_MLS_rejects": 0.085,
+        "only_Mahalanobis_rejects": 0.12625
+      },
+      "Energy vs Mahalanobis": {
+        "same_call": 0.77625,
+        "only_Energy_rejects": 0.0975,
+        "only_Mahalanobis_rejects": 0.12625
+      }
+    }
+  },
+  "per_class_rejection": {
+    "near": {
+      "bus": {
+        "MSP": 0.15,
+        "MLS": 0.16,
+        "Energy": 0.19,
+        "Mahalanobis": 0.15
+      },
+      "camel": {
+        "MSP": 0.4,
+        "MLS": 0.43,
+        "Energy": 0.45,
+        "Mahalanobis": 0.37
+      },
+      "fox": {
+        "MSP": 0.33,
+        "MLS": 0.29,
+        "Energy": 0.3,
+        "Mahalanobis": 0.28
+      },
+      "leopard": {
+        "MSP": 0.42,
+        "MLS": 0.43,
+        "Energy": 0.43,
+        "Mahalanobis": 0.33
+      },
+      "motorcycle": {
+        "MSP": 0.49,
+        "MLS": 0.68,
+        "Energy": 0.68,
+        "Mahalanobis": 0.53
+      },
+      "pickup_truck": {
+        "MSP": 0.15,
+        "MLS": 0.13,
+        "Energy": 0.14,
+        "Mahalanobis": 0.11
+      },
+      "tractor": {
+        "MSP": 0.33,
+        "MLS": 0.38,
+        "Energy": 0.4,
+        "Mahalanobis": 0.3
+      },
+      "wolf": {
+        "MSP": 0.28,
+        "MLS": 0.25,
+        "Energy": 0.25,
+        "Mahalanobis": 0.27
+      }
+    },
+    "far": {
+      "bottle": {
+        "MSP": 0.46,
+        "MLS": 0.55,
+        "Energy": 0.57,
+        "Mahalanobis": 0.55
+      },
+      "bowl": {
+        "MSP": 0.41,
+        "MLS": 0.53,
+        "Energy": 0.54,
+        "Mahalanobis": 0.49
+      },
+      "chair": {
+        "MSP": 0.41,
+        "MLS": 0.54,
+        "Energy": 0.52,
+        "Mahalanobis": 0.46
+      },
+      "clock": {
+        "MSP": 0.49,
+        "MLS": 0.53,
+        "Energy": 0.56,
+        "Mahalanobis": 0.59
+      },
+      "keyboard": {
+        "MSP": 0.46,
+        "MLS": 0.57,
+        "Energy": 0.59,
+        "Mahalanobis": 0.54
+      },
+      "mushroom": {
+        "MSP": 0.51,
+        "MLS": 0.51,
+        "Energy": 0.52,
+        "Mahalanobis": 0.45
+      },
+      "sunflower": {
+        "MSP": 0.44,
+        "MLS": 0.44,
+        "Energy": 0.49,
+        "Mahalanobis": 0.49
+      },
+      "wardrobe": {
+        "MSP": 0.37,
+        "MLS": 0.23,
+        "Energy": 0.21,
+        "Mahalanobis": 0.66
+      }
+    }
+  }
+}
