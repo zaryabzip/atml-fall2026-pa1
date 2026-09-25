@@ -1,0 +1,98 @@
+{
+  "erm": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9700598802395209,
+          "macro_f1": 0.9649726996725922
+        },
+        "art_painting": {
+          "accuracy": 0.9243902439024391,
+          "macro_f1": 0.9305878429600141
+        },
+        "cartoon": {
+          "accuracy": 0.9530916844349681,
+          "macro_f1": 0.9585839959210605
+        }
+      },
+      "mean_accuracy": 0.9491806028589761,
+      "mean_macro_f1": 0.9513815128512223,
+      "worst_accuracy": 0.9243902439024391,
+      "worst_macro_f1": 0.9305878429600141
+    },
+    "source_domain_separability": 0.8504983388704319,
+    "sharpness": 0.27786386013031006
+  },
+  "dan_dg_lam0.1": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9880239520958084,
+          "macro_f1": 0.9856787994447581
+        },
+        "art_painting": {
+          "accuracy": 0.9,
+          "macro_f1": 0.8967772471275984
+        },
+        "cartoon": {
+          "accuracy": 0.9317697228144989,
+          "macro_f1": 0.9363328456881185
+        }
+      },
+      "mean_accuracy": 0.9399312249701025,
+      "mean_macro_f1": 0.9395962974201583,
+      "worst_accuracy": 0.9,
+      "worst_macro_f1": 0.8967772471275984
+    },
+    "source_domain_separability": 0.8172757475083057,
+    "sharpness": 0.2308742105960846
+  },
+  "dan_dg": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9700598802395209,
+          "macro_f1": 0.9644572126554031
+        },
+        "art_painting": {
+          "accuracy": 0.875609756097561,
+          "macro_f1": 0.8771821710448509
+        },
+        "cartoon": {
+          "accuracy": 0.9488272921108742,
+          "macro_f1": 0.9542910109897604
+        }
+      },
+      "mean_accuracy": 0.9314989761493188,
+      "mean_macro_f1": 0.9319767982300048,
+      "worst_accuracy": 0.875609756097561,
+      "worst_macro_f1": 0.8771821710448509
+    },
+    "source_domain_separability": 0.6677740863787376,
+    "sharpness": 0.3389062285423279
+  },
+  "dan_dg_lam10": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.4161676646706587,
+          "macro_f1": 0.25703023117960877
+        },
+        "art_painting": {
+          "accuracy": 0.2682926829268293,
+          "macro_f1": 0.17395402226801387
+        },
+        "cartoon": {
+          "accuracy": 0.29850746268656714,
+          "macro_f1": 0.2202619197277915
+        }
+      },
+      "mean_accuracy": 0.3276559367613517,
+      "mean_macro_f1": 0.21708205772513803,
+      "worst_accuracy": 0.2682926829268293,
+      "worst_macro_f1": 0.17395402226801387
+    },
+    "source_domain_separability": 0.7508305647840532,
+    "sharpness": 4.219719409942627
+  }
+}

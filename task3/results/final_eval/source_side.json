@@ -1,0 +1,74 @@
+{
+  "erm": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9700598802395209,
+          "macro_f1": 0.9649726996725922
+        },
+        "art_painting": {
+          "accuracy": 0.9243902439024391,
+          "macro_f1": 0.9305878429600141
+        },
+        "cartoon": {
+          "accuracy": 0.9530916844349681,
+          "macro_f1": 0.9585839959210605
+        }
+      },
+      "mean_accuracy": 0.9491806028589761,
+      "mean_macro_f1": 0.9513815128512223,
+      "worst_accuracy": 0.9243902439024391,
+      "worst_macro_f1": 0.9305878429600141
+    },
+    "source_domain_separability": 0.8504983388704319,
+    "sharpness": 0.27786386013031006
+  },
+  "dan_dg": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9700598802395209,
+          "macro_f1": 0.9644572126554031
+        },
+        "art_painting": {
+          "accuracy": 0.875609756097561,
+          "macro_f1": 0.8771821710448509
+        },
+        "cartoon": {
+          "accuracy": 0.9488272921108742,
+          "macro_f1": 0.9542910109897604
+        }
+      },
+      "mean_accuracy": 0.9314989761493188,
+      "mean_macro_f1": 0.9319767982300048,
+      "worst_accuracy": 0.875609756097561,
+      "worst_macro_f1": 0.8771821710448509
+    },
+    "source_domain_separability": 0.6677740863787376,
+    "sharpness": 0.3389062285423279
+  },
+  "sam": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9820359281437125,
+          "macro_f1": 0.9776925778691513
+        },
+        "art_painting": {
+          "accuracy": 0.9219512195121952,
+          "macro_f1": 0.9230389962254002
+        },
+        "cartoon": {
+          "accuracy": 0.9509594882729211,
+          "macro_f1": 0.9569396897491949
+        }
+      },
+      "mean_accuracy": 0.9516488786429429,
+      "mean_macro_f1": 0.9525570879479154,
+      "worst_accuracy": 0.9219512195121952,
+      "worst_macro_f1": 0.9230389962254002
+    },
+    "source_domain_separability": 0.8504983388704319,
+    "sharpness": 0.12908995151519775
+  }
+}

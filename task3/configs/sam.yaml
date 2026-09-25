@@ -1,0 +1,5 @@
+_base_: ../../task2/configs/base.yaml
+run_name: sam
+method:
+  name: sam
+  rho: 0.05               # main comparison must stay 0.05; study: 0.01 / 0.05 / 0.1

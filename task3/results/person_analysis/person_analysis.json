@@ -1,0 +1,138 @@
+{
+  "erm": {
+    "domain_separability_within_class": {
+      "dog": {
+        "per_domain_n": 38,
+        "separability": 0.8857142857142857
+      },
+      "elephant": {
+        "per_domain_n": 41,
+        "separability": 0.918918918918919
+      },
+      "giraffe": {
+        "per_domain_n": 36,
+        "separability": 0.8484848484848485
+      },
+      "guitar": {
+        "per_domain_n": 27,
+        "separability": 0.8
+      },
+      "horse": {
+        "per_domain_n": 40,
+        "separability": 0.9166666666666666
+      },
+      "house": {
+        "per_domain_n": 56,
+        "separability": 0.8431372549019608
+      },
+      "person": {
+        "per_domain_n": 81,
+        "separability": 0.9452054794520548
+      }
+    },
+    "source_val_accuracy_per_class": {
+      "dog": 0.9375,
+      "elephant": 0.9672131147540983,
+      "giraffe": 0.9567901234567902,
+      "guitar": 0.9801980198019802,
+      "horse": 0.903448275862069,
+      "house": 0.9826589595375722,
+      "person": 0.9260700389105059
+    },
+    "source_val_person_accuracy_per_domain": {
+      "photo": 1.0,
+      "art_painting": 0.8555555555555555,
+      "cartoon": 0.9259259259259259
+    },
+    "sketch_person": {
+      "n": 160,
+      "accuracy": 0.68125,
+      "mean_cosine_to_centroid": {
+        "dog": 0.578696072101593,
+        "elephant": 0.6295394897460938,
+        "giraffe": 0.5399879217147827,
+        "guitar": 0.49475589394569397,
+        "horse": 0.5235331058502197,
+        "house": 0.4298478960990906,
+        "person": 0.737324595451355
+      },
+      "nearest_centroid_share": {
+        "dog": 0.0,
+        "elephant": 0.24375,
+        "giraffe": 0.05,
+        "guitar": 0.0,
+        "horse": 0.0125,
+        "house": 0.0,
+        "person": 0.69375
+      }
+    }
+  },
+  "dan_dg": {
+    "domain_separability_within_class": {
+      "dog": {
+        "per_domain_n": 38,
+        "separability": 0.8
+      },
+      "elephant": {
+        "per_domain_n": 41,
+        "separability": 0.7837837837837838
+      },
+      "giraffe": {
+        "per_domain_n": 36,
+        "separability": 0.6666666666666666
+      },
+      "guitar": {
+        "per_domain_n": 27,
+        "separability": 0.68
+      },
+      "horse": {
+        "per_domain_n": 40,
+        "separability": 0.6944444444444444
+      },
+      "house": {
+        "per_domain_n": 56,
+        "separability": 0.803921568627451
+      },
+      "person": {
+        "per_domain_n": 81,
+        "separability": 0.8767123287671232
+      }
+    },
+    "source_val_accuracy_per_class": {
+      "dog": 0.8489583333333334,
+      "elephant": 0.9234972677595629,
+      "giraffe": 0.9629629629629629,
+      "guitar": 0.9702970297029703,
+      "horse": 0.9241379310344827,
+      "house": 0.976878612716763,
+      "person": 0.9299610894941635
+    },
+    "source_val_person_accuracy_per_domain": {
+      "photo": 1.0,
+      "art_painting": 0.8333333333333334,
+      "cartoon": 0.9629629629629629
+    },
+    "sketch_person": {
+      "n": 160,
+      "accuracy": 0.24375,
+      "mean_cosine_to_centroid": {
+        "dog": 0.6489713191986084,
+        "elephant": 0.6310415267944336,
+        "giraffe": 0.6913058757781982,
+        "guitar": 0.5789280533790588,
+        "horse": 0.6965903043746948,
+        "house": 0.5029122233390808,
+        "person": 0.703192412853241
+      },
+      "nearest_centroid_share": {
+        "dog": 0.025,
+        "elephant": 0.05625,
+        "giraffe": 0.325,
+        "guitar": 0.025,
+        "horse": 0.23125,
+        "house": 0.0125,
+        "person": 0.325
+      }
+    }
+  }
+}

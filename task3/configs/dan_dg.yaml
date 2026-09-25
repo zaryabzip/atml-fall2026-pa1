@@ -1,0 +1,7 @@
+_base_: ../../task2/configs/base.yaml
+run_name: dan_dg
+method:
+  name: dan_dg
+  lambda_dg: 1.0          # main comparison must stay 1.0; study: 0.1 / 1 / 10
+  kernel_multipliers: [0.5, 1.0, 2.0]
+  mmd_unbiased: true      # shared/mmd.py explains why (biased estimator collapsed DAN-DG at lambda = 1)

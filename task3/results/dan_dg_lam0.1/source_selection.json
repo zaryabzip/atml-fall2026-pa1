@@ -1,0 +1,21 @@
+{
+  "epoch": 7,
+  "per_domain": {
+    "photo": {
+      "accuracy": 0.9880239520958084,
+      "macro_f1": 0.9856787994447581
+    },
+    "art_painting": {
+      "accuracy": 0.9,
+      "macro_f1": 0.8967772471275984
+    },
+    "cartoon": {
+      "accuracy": 0.9317697228144989,
+      "macro_f1": 0.9363328456881185
+    }
+  },
+  "mean_accuracy": 0.9399312249701025,
+  "mean_macro_f1": 0.9395962974201583,
+  "worst_accuracy": 0.9,
+  "worst_macro_f1": 0.8967772471275984
+}

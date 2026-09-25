@@ -1,0 +1,6 @@
+# ERM is NOT retrained. It is the Task 2 Source-only checkpoint, loaded unchanged.
+_base_: ../../task2/configs/base.yaml
+run_name: erm
+method:
+  name: erm
+  reuse_checkpoint: task2/source_only   # -> $PA1_OUT_ROOT/checkpoints/task2/source_only/best.pt
