@@ -61,14 +61,20 @@ def plot_design_study(eval_name, runs, param, reference=None, log_x=False, path=
     points = sorted((_param_value(run, param, task), run) for run in runs)
     xs = [x for x, _ in points]
 
-    fig, axes = plt.subplots(1, len(panels), figsize=(4.0 * len(panels), 3.8))
+    # Drawn close to its printed size (full text width) so the text stays readable.
+    plt.rcParams.update({"font.size": 9.5, "axes.titlesize": 10, "legend.fontsize": 8.5})
+    if len(panels) <= 3:
+        fig, axes = plt.subplots(1, len(panels), figsize=(7.0, 2.6))
+    else:
+        fig, axes = plt.subplots(2, (len(panels) + 1) // 2, figsize=(6.6, 5.0))
+        axes = axes.ravel()
     fig.patch.set_facecolor("white")
     for ax, (title, ylabel, getter) in zip(axes, panels):
         # One line through the study runs, with each point's value written next to it.
         ys = [getter(results[run]) for _, run in points]
-        ax.plot(xs, ys, marker="o", markersize=7, linewidth=2.2, color=PALETTE[0])
+        ax.plot(xs, ys, marker="o", markersize=5, linewidth=1.8, color=PALETTE[0])
         for x, y in zip(xs, ys):
-            ax.annotate(f"{y:.3f}", (x, y), textcoords="offset points", xytext=(0, 9), ha="center", fontsize=8)
+            ax.annotate(f"{y:.3f}", (x, y), textcoords="offset points", xytext=(0, 7), ha="center", fontsize=8)
 
         # Optional dashed reference line, e.g. Source-only, which has no value for this parameter.
         if reference is not None:
@@ -81,15 +87,14 @@ def plot_design_study(eval_name, runs, param, reference=None, log_x=False, path=
         ax.set_xticklabels([f"{x:g}" for x in xs])
         ax.set_xlabel(param.split(".")[-1])
         ax.set_ylabel(ylabel)
-        ax.set_title(title, fontsize=12, fontweight="bold")
+        ax.set_title(title, fontweight="bold")
         ax.margins(x=0.15, y=0.18)
         ax.grid(True, alpha=0.25, linewidth=0.7)
         for spine in ("top", "right"):
             ax.spines[spine].set_visible(False)
     if reference is not None:
-        axes[0].legend(fontsize=9, frameon=True)
+        axes[0].legend(frameon=True)
 
-    fig.suptitle(f"Design study: {param}", fontsize=14, fontweight="bold")
     fig.tight_layout()
     save_figure(fig, path or (PROJECT_ROOT / task / "results" / eval_name / "study_plot.png"), dpi=220)
 

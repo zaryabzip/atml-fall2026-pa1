@@ -37,6 +37,10 @@ class DANN(PACSMethod):
         # Domain loss: the discriminator tries to tell source (label 0) from target (label 1),
         # while the gradient-reversal layer trains the backbone to make that job harder.
         reversed_features = grad_reverse(combined_features, alpha)
+        if method_cfg.get("disc_input_norm"):
+            # Per-example LayerNorm (no learned scale): the discriminator sees each feature at a fixed size, so the
+            # backbone can no longer "win" the domain game by just making features bigger.
+            reversed_features = F.layer_norm(reversed_features, reversed_features.shape[1:])
         domain_logits = self.discriminator(reversed_features)
         domain_labels = torch.cat([
             torch.zeros(n_source, dtype=torch.long, device=combined_features.device),

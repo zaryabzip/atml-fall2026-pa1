@@ -67,8 +67,17 @@ Shared pieces: `shared/pacs*.py`, `shared/mmd.py`.
 - Checkpoints are chosen by mean source-val macro-F1 only.
 
 ## Status
-Done: data, splits, frozen-BN policy, model, training loop, Source-only.
-To do: MMD, GRL, discriminator, DAN, DANN, CDAN, separability, class analysis, final eval.
+Done: Source-only, DAN, DANN, CDAN, domain separability, class analysis, final evaluation, the lambda_MMD design study.
+
+Deviations from the handout (documented in the report):
+- DAN uses the unbiased MMD estimator (`shared/mmd.py`; the biased one collapsed DAN-DG at small batches).
+- DANN and CDAN apply a parameter-free LayerNorm to the discriminator input (`method.disc_input_norm`); with the
+  handout setup both diverged. Evidence: `python -m task2.evaluation.stability_check` -> `results/stability_check/`.
+- An extra attempt with a 10x discriminator learning rate is kept separate (`results/extra_disc_lr10/`,
+  `results/disc_lr_decision.txt`); it is not the main result.
+
+Final-analysis extras: `python -m task2.evaluation.sketch_class_report --task task2 --runs source_only dan dann cdan`
+(per-class accuracy, confusion matrices, failure images -> `results/sketch_class_report/`).
 
 ## Required outputs
 - Table: each source-val domain, mean source accuracy + macro-F1, Sketch accuracy + macro-F1, Sketch accuracy change, domain separability

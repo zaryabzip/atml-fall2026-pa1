@@ -1,0 +1,310 @@
+{
+  "source_only": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9700598802395209,
+          "macro_f1": 0.9649726996725922
+        },
+        "art_painting": {
+          "accuracy": 0.9243902439024391,
+          "macro_f1": 0.9305878429600141
+        },
+        "cartoon": {
+          "accuracy": 0.9530916844349681,
+          "macro_f1": 0.9585839959210605
+        }
+      },
+      "mean_accuracy": 0.9491806028589761,
+      "mean_macro_f1": 0.9513815128512223,
+      "worst_accuracy": 0.9243902439024391,
+      "worst_macro_f1": 0.9305878429600141
+    },
+    "sketch": {
+      "accuracy": 0.677271570374141,
+      "macro_f1": 0.6997137252899276,
+      "accuracy_change_vs_baseline": 0.0
+    },
+    "domain_separability": 0.9972527472527473
+  },
+  "dan_lmmd0.1": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9760479041916168,
+          "macro_f1": 0.972272271050439
+        },
+        "art_painting": {
+          "accuracy": 0.9073170731707317,
+          "macro_f1": 0.9082803734309653
+        },
+        "cartoon": {
+          "accuracy": 0.9402985074626866,
+          "macro_f1": 0.9457352845124676
+        }
+      },
+      "mean_accuracy": 0.941221161608345,
+      "mean_macro_f1": 0.9420959763312906,
+      "worst_accuracy": 0.9073170731707317,
+      "worst_macro_f1": 0.9082803734309653
+    },
+    "sketch": {
+      "accuracy": 0.6981420208704505,
+      "macro_f1": 0.6518399045364449,
+      "accuracy_change_vs_baseline": 0.020870450496309534
+    },
+    "domain_separability": 0.978021978021978,
+    "class_analysis": {
+      "per_class": {
+        "dog": {
+          "accuracy_method": 0.44041450777202074,
+          "accuracy_source_only": 0.3225388601036269,
+          "change": 0.11787564766839381
+        },
+        "elephant": {
+          "accuracy_method": 0.904054054054054,
+          "accuracy_source_only": 0.9337837837837838,
+          "change": -0.02972972972972976
+        },
+        "giraffe": {
+          "accuracy_method": 0.6586985391766268,
+          "accuracy_source_only": 0.702523240371846,
+          "change": -0.043824701195219196
+        },
+        "guitar": {
+          "accuracy_method": 0.8914473684210527,
+          "accuracy_source_only": 0.868421052631579,
+          "change": 0.023026315789473673
+        },
+        "horse": {
+          "accuracy_method": 0.5919117647058824,
+          "accuracy_source_only": 0.5870098039215687,
+          "change": 0.004901960784313708
+        },
+        "house": {
+          "accuracy_method": 1.0,
+          "accuracy_source_only": 0.95,
+          "change": 0.050000000000000044
+        },
+        "person": {
+          "accuracy_method": 0.83125,
+          "accuracy_source_only": 0.68125,
+          "change": 0.15000000000000002
+        }
+      },
+      "biggest_gain": {
+        "class": "person",
+        "change": 0.15000000000000002,
+        "top_confusions": [
+          {
+            "predicted_as": "house",
+            "count": 24
+          },
+          {
+            "predicted_as": "elephant",
+            "count": 2
+          },
+          {
+            "predicted_as": "dog",
+            "count": 1
+          }
+        ]
+      },
+      "biggest_drop": {
+        "class": "giraffe",
+        "change": -0.043824701195219196,
+        "top_confusions": [
+          {
+            "predicted_as": "dog",
+            "count": 64
+          },
+          {
+            "predicted_as": "person",
+            "count": 60
+          },
+          {
+            "predicted_as": "horse",
+            "count": 50
+          }
+        ]
+      }
+    }
+  },
+  "dan": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.9670658682634731,
+          "macro_f1": 0.9611127957527891
+        },
+        "art_painting": {
+          "accuracy": 0.9170731707317074,
+          "macro_f1": 0.9182803632151005
+        },
+        "cartoon": {
+          "accuracy": 0.9402985074626866,
+          "macro_f1": 0.9461164788788696
+        }
+      },
+      "mean_accuracy": 0.9414791821526224,
+      "mean_macro_f1": 0.9418365459489197,
+      "worst_accuracy": 0.9170731707317074,
+      "worst_macro_f1": 0.9182803632151005
+    },
+    "sketch": {
+      "accuracy": 0.6161873250190888,
+      "macro_f1": 0.5917828374532956,
+      "accuracy_change_vs_baseline": -0.06108424535505219
+    },
+    "domain_separability": 0.8241758241758241,
+    "class_analysis": {
+      "per_class": {
+        "dog": {
+          "accuracy_method": 0.5284974093264249,
+          "accuracy_source_only": 0.3225388601036269,
+          "change": 0.20595854922279794
+        },
+        "elephant": {
+          "accuracy_method": 0.5216216216216216,
+          "accuracy_source_only": 0.9337837837837838,
+          "change": -0.41216216216216217
+        },
+        "giraffe": {
+          "accuracy_method": 0.49800796812749004,
+          "accuracy_source_only": 0.702523240371846,
+          "change": -0.20451527224435595
+        },
+        "guitar": {
+          "accuracy_method": 0.7894736842105263,
+          "accuracy_source_only": 0.868421052631579,
+          "change": -0.07894736842105265
+        },
+        "horse": {
+          "accuracy_method": 0.6727941176470589,
+          "accuracy_source_only": 0.5870098039215687,
+          "change": 0.08578431372549022
+        },
+        "house": {
+          "accuracy_method": 1.0,
+          "accuracy_source_only": 0.95,
+          "change": 0.050000000000000044
+        },
+        "person": {
+          "accuracy_method": 0.89375,
+          "accuracy_source_only": 0.68125,
+          "change": 0.21250000000000002
+        }
+      },
+      "biggest_gain": {
+        "class": "person",
+        "change": 0.21250000000000002,
+        "top_confusions": [
+          {
+            "predicted_as": "house",
+            "count": 17
+          }
+        ]
+      },
+      "biggest_drop": {
+        "class": "elephant",
+        "change": -0.41216216216216217,
+        "top_confusions": [
+          {
+            "predicted_as": "person",
+            "count": 238
+          },
+          {
+            "predicted_as": "house",
+            "count": 67
+          },
+          {
+            "predicted_as": "dog",
+            "count": 43
+          }
+        ]
+      }
+    }
+  },
+  "dan_lmmd10": {
+    "source_val": {
+      "per_domain": {
+        "photo": {
+          "accuracy": 0.25748502994011974,
+          "macro_f1": 0.058503401360544216
+        },
+        "art_painting": {
+          "accuracy": 0.21951219512195122,
+          "macro_f1": 0.05142857142857143
+        },
+        "cartoon": {
+          "accuracy": 0.17270788912579957,
+          "macro_f1": 0.04207792207792208
+        }
+      },
+      "mean_accuracy": 0.21656837139595686,
+      "mean_macro_f1": 0.05066996495567924,
+      "worst_accuracy": 0.17270788912579957,
+      "worst_macro_f1": 0.04207792207792208
+    },
+    "sketch": {
+      "accuracy": 0.04072283023670145,
+      "macro_f1": 0.011179820424134438,
+      "accuracy_change_vs_baseline": -0.6365487401374396
+    },
+    "domain_separability": 0.5604395604395604,
+    "class_analysis": {
+      "per_class": {
+        "dog": {
+          "accuracy_method": 0.0,
+          "accuracy_source_only": 0.3225388601036269,
+          "change": -0.3225388601036269
+        },
+        "elephant": {
+          "accuracy_method": 0.0,
+          "accuracy_source_only": 0.9337837837837838,
+          "change": -0.9337837837837838
+        },
+        "giraffe": {
+          "accuracy_method": 0.0,
+          "accuracy_source_only": 0.702523240371846,
+          "change": -0.702523240371846
+        },
+        "guitar": {
+          "accuracy_method": 0.0,
+          "accuracy_source_only": 0.868421052631579,
+          "change": -0.868421052631579
+        },
+        "horse": {
+          "accuracy_method": 0.0,
+          "accuracy_source_only": 0.5870098039215687,
+          "change": -0.5870098039215687
+        },
+        "house": {
+          "accuracy_method": 0.0,
+          "accuracy_source_only": 0.95,
+          "change": -0.95
+        },
+        "person": {
+          "accuracy_method": 1.0,
+          "accuracy_source_only": 0.68125,
+          "change": 0.31875
+        }
+      },
+      "biggest_gain": {
+        "class": "person",
+        "change": 0.31875,
+        "top_confusions": []
+      },
+      "biggest_drop": {
+        "class": "house",
+        "change": -0.95,
+        "top_confusions": [
+          {
+            "predicted_as": "person",
+            "count": 80
+          }
+        ]
+      }
+    }
+  }
+}

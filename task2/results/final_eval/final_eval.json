@@ -134,88 +134,92 @@
     "source_val": {
       "per_domain": {
         "photo": {
-          "accuracy": 0.5119760479041916,
-          "macro_f1": 0.35667621313865333
+          "accuracy": 0.9760479041916168,
+          "macro_f1": 0.9715939493697896
         },
         "art_painting": {
-          "accuracy": 0.375609756097561,
-          "macro_f1": 0.290575339542225
+          "accuracy": 0.9170731707317074,
+          "macro_f1": 0.9212448120804652
         },
         "cartoon": {
-          "accuracy": 0.39445628997867804,
-          "macro_f1": 0.3673426928320132
+          "accuracy": 0.9445628997867804,
+          "macro_f1": 0.9484887297897675
         }
       },
-      "mean_accuracy": 0.42734736466014356,
-      "mean_macro_f1": 0.3381980818376305,
-      "worst_accuracy": 0.375609756097561,
-      "worst_macro_f1": 0.290575339542225
+      "mean_accuracy": 0.9458946582367016,
+      "mean_macro_f1": 0.9471091637466741,
+      "worst_accuracy": 0.9170731707317074,
+      "worst_macro_f1": 0.9212448120804652
     },
     "sketch": {
-      "accuracy": 0.02570628658691779,
-      "macro_f1": 0.014961399556343303,
-      "accuracy_change_vs_baseline": -0.6515652837872232
+      "accuracy": 0.2972766607279206,
+      "macro_f1": 0.23430607453901592,
+      "accuracy_change_vs_baseline": -0.3799949096462204
     },
-    "domain_separability": 1.0,
+    "domain_separability": 0.9986263736263736,
     "class_analysis": {
       "per_class": {
         "dog": {
-          "accuracy_method": 0.03238341968911917,
+          "accuracy_method": 0.17487046632124353,
           "accuracy_source_only": 0.3225388601036269,
-          "change": -0.29015544041450775
+          "change": -0.1476683937823834
         },
         "elephant": {
-          "accuracy_method": 0.0,
+          "accuracy_method": 0.9972972972972973,
           "accuracy_source_only": 0.9337837837837838,
-          "change": -0.9337837837837838
+          "change": 0.06351351351351353
         },
         "giraffe": {
-          "accuracy_method": 0.0,
+          "accuracy_method": 0.06640106241699867,
           "accuracy_source_only": 0.702523240371846,
-          "change": -0.702523240371846
+          "change": -0.6361221779548474
         },
         "guitar": {
-          "accuracy_method": 0.0,
+          "accuracy_method": 0.2631578947368421,
           "accuracy_source_only": 0.868421052631579,
-          "change": -0.868421052631579
+          "change": -0.605263157894737
         },
         "horse": {
-          "accuracy_method": 0.0,
+          "accuracy_method": 0.07598039215686274,
           "accuracy_source_only": 0.5870098039215687,
-          "change": -0.5870098039215687
+          "change": -0.511029411764706
         },
         "house": {
-          "accuracy_method": 0.0125,
+          "accuracy_method": 0.125,
           "accuracy_source_only": 0.95,
-          "change": -0.9375
+          "change": -0.825
         },
         "person": {
-          "accuracy_method": 0.46875,
+          "accuracy_method": 0.08125,
           "accuracy_source_only": 0.68125,
-          "change": -0.21250000000000002
+          "change": -0.6
         }
       },
       "biggest_gain": {
-        "class": "person",
-        "change": -0.21250000000000002,
+        "class": "elephant",
+        "change": 0.06351351351351353,
         "top_confusions": [
           {
             "predicted_as": "dog",
-            "count": 85
+            "count": 2
           }
         ]
       },
       "biggest_drop": {
         "class": "house",
-        "change": -0.9375,
+        "change": -0.825,
         "top_confusions": [
           {
             "predicted_as": "dog",
-            "count": 73
+            "count": 36
           },
           {
-            "predicted_as": "person",
-            "count": 6
+            "predicted_as": "elephant",
+            "count": 33
+          },
+          {
+            "predicted_as": "horse",
+            "count": 1
           }
         ]
       }
@@ -225,60 +229,60 @@
     "source_val": {
       "per_domain": {
         "photo": {
-          "accuracy": 0.9550898203592815,
-          "macro_f1": 0.9473931756128773
+          "accuracy": 0.9580838323353293,
+          "macro_f1": 0.9511711089356124
         },
         "art_painting": {
-          "accuracy": 0.8365853658536585,
-          "macro_f1": 0.8357239171260513
+          "accuracy": 0.9195121951219513,
+          "macro_f1": 0.9180027680149075
         },
         "cartoon": {
-          "accuracy": 0.8976545842217484,
-          "macro_f1": 0.9035091469628519
+          "accuracy": 0.9466950959488273,
+          "macro_f1": 0.9514174658336882
         }
       },
-      "mean_accuracy": 0.8964432568115628,
-      "mean_macro_f1": 0.8955420799005935,
-      "worst_accuracy": 0.8365853658536585,
-      "worst_macro_f1": 0.8357239171260513
+      "mean_accuracy": 0.9414303744687026,
+      "mean_macro_f1": 0.9401971142614028,
+      "worst_accuracy": 0.9195121951219513,
+      "worst_macro_f1": 0.9180027680149075
     },
     "sketch": {
-      "accuracy": 0.6192415372868414,
-      "macro_f1": 0.6346221927434883,
-      "accuracy_change_vs_baseline": -0.05803003308729959
+      "accuracy": 0.7831509289895647,
+      "macro_f1": 0.7823348428969478,
+      "accuracy_change_vs_baseline": 0.10587935861542375
     },
-    "domain_separability": 0.9972527472527473,
+    "domain_separability": 0.9821428571428571,
     "class_analysis": {
       "per_class": {
         "dog": {
-          "accuracy_method": 0.6191709844559585,
+          "accuracy_method": 0.6437823834196891,
           "accuracy_source_only": 0.3225388601036269,
-          "change": 0.2966321243523316
+          "change": 0.32124352331606215
         },
         "elephant": {
-          "accuracy_method": 0.2554054054054054,
+          "accuracy_method": 0.75,
           "accuracy_source_only": 0.9337837837837838,
-          "change": -0.6783783783783783
+          "change": -0.1837837837837838
         },
         "giraffe": {
-          "accuracy_method": 0.648074369189907,
+          "accuracy_method": 0.7277556440903055,
           "accuracy_source_only": 0.702523240371846,
-          "change": -0.054448871181938974
+          "change": 0.025232403718459473
         },
         "guitar": {
-          "accuracy_method": 0.868421052631579,
+          "accuracy_method": 0.9161184210526315,
           "accuracy_source_only": 0.868421052631579,
-          "change": 0.0
+          "change": 0.047697368421052544
         },
         "horse": {
-          "accuracy_method": 0.625,
+          "accuracy_method": 0.8370098039215687,
           "accuracy_source_only": 0.5870098039215687,
-          "change": 0.03799019607843135
+          "change": 0.25
         },
         "house": {
-          "accuracy_method": 1.0,
+          "accuracy_method": 0.9625,
           "accuracy_source_only": 0.95,
-          "change": 0.050000000000000044
+          "change": 0.012500000000000067
         },
         "person": {
           "accuracy_method": 1.0,
@@ -287,25 +291,38 @@
         }
       },
       "biggest_gain": {
-        "class": "person",
-        "change": 0.31875,
-        "top_confusions": []
+        "class": "dog",
+        "change": 0.32124352331606215,
+        "top_confusions": [
+          {
+            "predicted_as": "person",
+            "count": 129
+          },
+          {
+            "predicted_as": "elephant",
+            "count": 62
+          },
+          {
+            "predicted_as": "horse",
+            "count": 56
+          }
+        ]
       },
       "biggest_drop": {
         "class": "elephant",
-        "change": -0.6783783783783783,
+        "change": -0.1837837837837838,
         "top_confusions": [
           {
             "predicted_as": "dog",
-            "count": 339
+            "count": 87
           },
           {
             "predicted_as": "person",
-            "count": 198
+            "count": 79
           },
           {
-            "predicted_as": "house",
-            "count": 11
+            "predicted_as": "horse",
+            "count": 17
           }
         ]
       }

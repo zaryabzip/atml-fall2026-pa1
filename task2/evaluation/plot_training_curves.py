@@ -47,11 +47,19 @@ def _load_run_log(run_name: str, default_task: str = "task2") -> tuple:
 
 
 def plot_training_curves(run_names, path, default_task: str = "task2") -> None:
-    """One figure, two panels: classification loss (left) and MMD/domain loss (right), one
-    line per run. A run with no alignment term (Source-only) just doesn't get a line on the right."""
+    """One figure, four panels, one line per run: classification loss, MMD/domain loss, discriminator accuracy
+    (adversarial runs only; 0.5 = chance) and mean source-validation macro-F1 (the checkpoint-selection metric)."""
     import matplotlib.pyplot as plt
 
-    fig, (cls_ax, method_ax) = plt.subplots(1, 2, figsize=(11, 4.5))
+    # Drawn close to its printed size (about 5.2 in wide in the report) so the text stays readable.
+    plt.rcParams.update({"font.size": 9.5, "axes.titlesize": 10, "legend.fontsize": 8.5})
+    has_disc = any(r and "train/domain_acc" in r[0] for r in (_load_run_log(n, default_task)[1] for n in run_names))
+    if has_disc:
+        fig, axes = plt.subplots(2, 2, figsize=(6.6, 5.2))
+        (cls_ax, method_ax), (disc_ax, f1_ax) = axes
+    else:  # no adversarial run: one row of three panels instead of an empty discriminator panel
+        fig, (cls_ax, method_ax, f1_ax) = plt.subplots(1, 3, figsize=(7.0, 2.6))
+        disc_ax = fig.add_subplot(111); disc_ax.set_visible(False)
     fig.patch.set_facecolor("white")
 
     # Plot each run's classification loss, and its MMD/domain loss if it has one.
@@ -65,39 +73,55 @@ def plot_training_curves(run_names, path, default_task: str = "task2") -> None:
 
         epochs = [r["epoch"] for r in records]
         cls_losses = [r["train/cls_loss"] for r in records]
-        cls_ax.plot(epochs, cls_losses, marker="o", markersize=4, linewidth=2, color=color, label=run_name)
+        cls_ax.plot(epochs, cls_losses, marker="o", markersize=3, linewidth=1.5, color=color, label=run_name)
 
         specific_key = METHOD_SPECIFIC_KEY.get(method_name)
         if specific_key is not None and specific_key in records[0]:
             any_method_specific = True
             values = [r[specific_key] for r in records]
             term_name = "MMD" if method_name in ("dan", "dan_dg") else "domain loss"
-            method_ax.plot(epochs, values, marker="o", markersize=4, linewidth=2, color=color,
+            method_ax.plot(epochs, values, marker="o", markersize=3, linewidth=1.5, color=color,
                           label=f"{run_name} ({term_name})")
+        if "train/domain_acc" in records[0]:
+            disc_ax.plot(epochs, [r["train/domain_acc"] for r in records], marker="o", markersize=3, linewidth=1.5,
+                         color=color, label=run_name)
+        f1_ax.plot(epochs, [r["val/mean_macro_f1"] for r in records], marker="o", markersize=3, linewidth=1.5,
+                   color=color, label=run_name)
 
     # Style the left panel (classification loss).
     cls_ax.set_xlabel("epoch")
     cls_ax.set_ylabel("classification loss")
-    cls_ax.set_title("Classification loss", fontsize=12, fontweight="bold")
+    cls_ax.set_title("Classification loss", fontweight="bold")
     cls_ax.grid(True, alpha=0.25, linewidth=0.7)
-    cls_ax.legend(fontsize=9)
+    cls_ax.legend()
     for spine in ("top", "right"):
         cls_ax.spines[spine].set_visible(False)
 
     # Style the right panel (MMD / domain loss), or say plainly that it's empty.
     method_ax.set_xlabel("epoch")
     method_ax.set_ylabel("alignment loss")
-    method_ax.set_title("MMD / domain loss", fontsize=12, fontweight="bold")
+    method_ax.set_title("MMD / domain loss", fontweight="bold")
     method_ax.grid(True, alpha=0.25, linewidth=0.7)
     if any_method_specific:
-        method_ax.legend(fontsize=9)
+        method_ax.legend()
     else:
         method_ax.text(0.5, 0.5, "no adaptation runs selected", ha="center", va="center",
                        transform=method_ax.transAxes, color="#888888")
     for spine in ("top", "right"):
         method_ax.spines[spine].set_visible(False)
 
-    fig.suptitle("Training curves", fontsize=14, fontweight="bold")
+    disc_ax.axhline(0.5, color="#888888", linestyle="--", linewidth=1)
+    for ax, ylabel, title in ((disc_ax, "discriminator accuracy", "Discriminator accuracy (0.5 = chance)"),
+                              (f1_ax, "macro-F1", "Mean source-validation macro-F1")):
+        ax.set_xlabel("epoch"); ax.set_ylabel(ylabel); ax.set_title(title, fontweight="bold")
+        ax.grid(True, alpha=0.25, linewidth=0.7)
+        if ax.get_legend_handles_labels()[0]:
+            ax.legend()
+        for spine in ("top", "right"):
+            ax.spines[spine].set_visible(False)
+    if not has_disc:
+        fig.delaxes(disc_ax)
+    fig.tight_layout()
     save_figure(fig, path, dpi=220)
 
 

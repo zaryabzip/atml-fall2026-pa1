@@ -42,6 +42,9 @@ class CDAN(PACSMethod):
         probs = F.softmax(combined_logits, dim=1)  # (N, 7)
         joint = torch.bmm(probs.unsqueeze(2), combined_features.unsqueeze(1)).flatten(1)  # (N, 3584)
         reversed_joint = grad_reverse(joint, alpha)
+        if method_cfg.get("disc_input_norm"):
+            # Same fix as DANN: fixed-size discriminator input, so the backbone can't win by inflating features.
+            reversed_joint = F.layer_norm(reversed_joint, reversed_joint.shape[1:])
         domain_logits = self.discriminator(reversed_joint)
         domain_labels = torch.cat([
             torch.zeros(n_source, dtype=torch.long, device=combined_features.device),

@@ -7,3 +7,5 @@ method:
   domain_loss_weight: 1.0
   disc_hidden: 256
   disc_dropout: 0.5
+  disc_input_norm: true   # LayerNorm before the discriminator; stops feature blow-up (see report, deviations)
+  disc_lr_mult: 1.0       # 10.0 was tried as an extra attempt (task2/results/disc_lr_decision.txt)

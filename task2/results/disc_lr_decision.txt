@@ -1,0 +1,39 @@
+Discriminator learning-rate change for DANN and CDAN -- recorded 2026-09-24, BEFORE the new runs were trained.
+
+HONEST CONTEXT: the Sketch (target) results of the previous DANN/CDAN runs HAD ALREADY BEEN SEEN when this was decided
+(DANN 29.7%, CDAN 78.3% Sketch accuracy). Those results are kept in task2/results/_backup_disc_lr1x/.
+
+Change: the domain discriminator gets 10x the learning rate of the rest of the model (1e-3 instead of 1e-4;
+method.disc_lr_mult: 10). Same change for DANN and CDAN, because the handout sets CDAN's discriminator up like DANN's.
+Everything else unchanged: discriminator shape, dropout, alpha schedule, loss weight, disc_input_norm fix, seed.
+
+Reason (training-side evidence only, no Sketch labels): in the previous DANN run the discriminator's epoch-mean accuracy
+stayed far BELOW chance (0.16-0.36) for the whole run. A discriminator that kept up with the backbone would simply
+flip its answers and be right again, so being stuck below 50% means it adapts too slowly; the backbone was flipping the
+domain signal instead of removing it. A faster discriminator is the standard remedy (DANN codebases give the newly
+initialized discriminator a higher learning rate than the pretrained backbone).
+
+Pass/fail rule, fixed now, checked WITHOUT any Sketch labels:
+  1. Discriminator epoch-mean accuracy over the second half of training within about 0.45-0.65, and domain loss near
+     ln 2 = 0.69 (the discriminator is confused, not fooled into flipping).
+  2. Best mean source-validation macro-F1 no more than ~0.02 below the previous run (DANN 0.947, CDAN 0.940).
+  3. Domain separability (source-val vs unlabeled Sketch features; no labels) below the previous run's
+     (DANN 0.999, CDAN 0.982).
+Decision: the new runs replace the old ones as the main Task 2 DANN/CDAN results only if they pass 1 and 2 (3 is
+reported either way). Otherwise the previous runs stay the main results and these are reported as a documented
+extra attempt. Sketch accuracy plays no part in this decision, whatever it turns out to be.
+
+OUTCOME -- recorded 2026-09-24 ~03:16 PKT, after both runs finished and BEFORE looking at the new final evaluation
+(Sketch) numbers:
+  DANN (10x disc lr): best mean source-val macro-F1 0.921 at epoch 2 (previous 0.947, drop 0.026 > 0.02) -> FAILS rule 2.
+      Discriminator accuracy near chance from epoch 4 on (0.53-0.56), but domain loss 0.86-1.12, not ~0.69.
+  CDAN (10x disc lr): best 0.935 at epoch 8 (previous 0.940, drop 0.005) -> passes rules 1 and 2
+      (second-half discriminator accuracy 0.54-0.59, domain loss 0.69-0.79).
+Decision: the change was made for BOTH methods so that CDAN's discriminator stays set up like DANN's. Because DANN
+fails, the previous runs (disc_lr_mult = 1, in _backup_disc_lr1x/) remain the main Task 2 DANN and CDAN results for
+both methods, and these 10x runs are reported only as a documented extra attempt. This is not revised after seeing
+their Sketch numbers.
+
+Location note (added later): after this decision the 1x runs were moved back from _backup_disc_lr1x/ to
+task2/results/dann/ and task2/results/cdan/ (the main results); the 10x runs are task2/results/dann_dlr10/ and
+cdan_dlr10/, evaluated in task2/results/extra_disc_lr10/.

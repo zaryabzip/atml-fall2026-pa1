@@ -109,13 +109,16 @@ def _save_summary_csv(results: dict, runs, path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="") as f:
         writer = csv.writer(f)
-        header = ["run", "mean_source_accuracy", "mean_source_macro_f1", "sketch_accuracy", "sketch_macro_f1",
-                   "sketch_accuracy_change_vs_baseline", "domain_separability"]
+        domains = list(results[runs[0]]["source_val"]["per_domain"])
+        header = (["run"] + [f"{d}_{m}" for d in domains for m in ("accuracy", "macro_f1")]
+                  + ["mean_source_accuracy", "mean_source_macro_f1", "sketch_accuracy", "sketch_macro_f1",
+                     "sketch_accuracy_change_vs_baseline", "domain_separability"])
         writer.writerow(header)
         for run in runs:
             r = results[run]
+            per_domain = [r["source_val"]["per_domain"][d][m] for d in domains for m in ("accuracy", "macro_f1")]
             writer.writerow([
-                run,
+                run, *per_domain,
                 r["source_val"]["mean_accuracy"],
                 r["source_val"]["mean_macro_f1"],
                 r["sketch"]["accuracy"],

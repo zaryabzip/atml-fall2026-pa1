@@ -1,0 +1,24 @@
+seed: 6304
+device: auto
+run_name: dan
+data:
+  pacs_root: null
+train:
+  max_epochs: 30
+  patience: 5
+  lr: 0.0001
+  weight_decay: 0.0001
+  per_domain_batch: 8
+  target_batch: 24
+  eval_batch: 128
+  steps_per_epoch: auto
+  amp: true
+  data_parallel: false
+  num_workers_per_loader: null
+method:
+  name: dan
+  lambda_mmd: 1.0
+  kernel_multipliers:
+  - 0.5
+  - 1.0
+  - 2.0

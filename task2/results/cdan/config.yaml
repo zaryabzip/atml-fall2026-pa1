@@ -22,3 +22,4 @@ method:
   domain_loss_weight: 1.0
   disc_hidden: 256
   disc_dropout: 0.5
+  disc_input_norm: true

@@ -47,6 +47,11 @@ class PACSMethod:
         with autocast(self.device, amp):
             loss, logs = self.compute_loss(source, target, progress)
         scaler.scale(loss).backward()
+        clip = self.cfg["train"].get("grad_clip")  # null = off (the default for every existing run)
+        if clip:
+            scaler.unscale_(optimizer)  # clip the real gradients, not the fp16-scaled ones
+            params = [p for group in optimizer.param_groups for p in group["params"] if p.grad is not None]
+            logs["grad_norm"] = torch.nn.utils.clip_grad_norm_(params, float(clip)).detach()
         scaler.step(optimizer)
         scaler.update()
         return {"loss": loss.detach(), **logs}
@@ -97,8 +102,13 @@ def fit(cfg: dict, method_cls, task: str) -> dict:
     extra = method.extra_modules()
     if extra is not None:
         extra.to(device)
-    params = list(model.parameters()) + (list(extra.parameters()) if extra is not None else [])
-    optimizer = torch.optim.AdamW(params, lr=train_cfg["lr"], weight_decay=train_cfg["weight_decay"])
+    # The extra module (a domain discriminator) may get its own learning rate: method.disc_lr_mult x the base lr
+    # (default 1 = one shared learning rate, as in every run before this option existed).
+    param_groups = [{"params": list(model.parameters())}]
+    if extra is not None:
+        disc_lr = train_cfg["lr"] * float(cfg["method"].get("disc_lr_mult", 1.0))
+        param_groups.append({"params": list(extra.parameters()), "lr": disc_lr})
+    optimizer = torch.optim.AdamW(param_groups, lr=train_cfg["lr"], weight_decay=train_cfg["weight_decay"])
     scaler = grad_scaler(amp)
 
     steps = train_cfg.get("steps_per_epoch", "auto")
