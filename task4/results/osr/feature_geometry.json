@@ -1,0 +1,47 @@
+{
+  "geometry": {
+    "vanilla": {
+      "class_spread": 0.1959943324327469,
+      "nearest_mean_distance_vs_known": {
+        "near": 2.0556716918945312,
+        "far": 2.553642749786377
+      },
+      "distance_auroc": {
+        "near": 0.7973716875000001,
+        "far": 0.911729125
+      }
+    },
+    "gcsc": {
+      "class_spread": 0.2650369703769684,
+      "nearest_mean_distance_vs_known": {
+        "near": 1.7163652181625366,
+        "far": 2.0182769298553467
+      },
+      "distance_auroc": {
+        "near": 0.7837073125,
+        "far": 0.9122073125
+      }
+    }
+  },
+  "proser_placeholder_median": {
+    "test": -2.5505824089050293,
+    "near": -0.3569324016571045,
+    "far": 0.39021849632263184
+  },
+  "bootstrap": {
+    "vanilla_near_msp_minus_mls": {
+      "mean": 0.015782936062500003,
+      "ci95": [
+        0.010610575000000002,
+        0.021071203125000017
+      ]
+    },
+    "near_mls_gcsc_minus_vanilla": {
+      "mean": 0.017398071125000004,
+      "ci95": [
+        0.0023779953125000475,
+        0.03199707187500001
+      ]
+    }
+  }
+}
