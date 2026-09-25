@@ -23,8 +23,9 @@ def to_grayscale(x: torch.Tensor) -> torch.Tensor:
 
 
 def extra_color(x: torch.Tensor, kind: str = "hue_rotation", **params) -> torch.Tensor:
-    """Chosen color change (default: hue rotation). Rotating hue keeps shape, luminance and
-    saturation intact and only changes what color each object is painted."""
+    """Chosen color change (default: hue rotation). Rotating hue in HSV space keeps shape and saturation and
+    changes what color each object is painted. Brightness changes a little (HSV value is kept, perceived luminance is
+    not): on 50 eval images the mean luminance change is about 0.01, 99th percentile about 0.07."""
     if kind != "hue_rotation":  # only one kind is implemented right now
         raise ValueError(f"Unknown extra_color kind {kind!r}; choose 'hue_rotation' (or implement another).")
 

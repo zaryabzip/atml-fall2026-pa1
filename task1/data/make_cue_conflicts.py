@@ -31,7 +31,7 @@ from PIL import Image
 from torch import nn
 
 from common.config import load_config
-from common.io import PROJECT_ROOT, save_json
+from common.io import PROJECT_ROOT, load_json, save_json
 from task1.data.stl10 import STL10_CLASSES, common_transform, load_stl10
 
 ADAIN_DIR = PROJECT_ROOT / "task1" / "cache" / "adain"  # where the pretrained weights are cached
@@ -241,6 +241,14 @@ def _directions_from_pairs(class_pairs) -> list:
 
 
 def main():
+    # The saved metadata holds the visual check and the top-up (task1/data/topup_cue_conflicts.py); regenerating
+    # would silently replace that curated set with the technical-rule-only one. Refuse unless explicitly forced.
+    import sys
+    if METADATA_PATH.exists() and "--force" not in sys.argv:
+        if any("visual_rejected" in m for m in load_json(METADATA_PATH)):
+            raise SystemExit(f"{METADATA_PATH} holds the curated (visually checked) set. Re-run with --force to "
+                             "regenerate from scratch; the visual check and top-up must then be redone.")
+
     # Load the design-choice settings from configs/default.yaml.
     cfg = load_config(PROJECT_ROOT / "task1" / "configs" / "default.yaml")
     class_pairs = cfg["cue_conflict"]["class_pairs"]

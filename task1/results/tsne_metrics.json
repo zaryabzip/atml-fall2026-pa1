@@ -1,0 +1,92 @@
+{
+ "resnet50": {
+  "grayscale": {
+   "mixing": 0.5184,
+   "class_kept": 0.9438,
+   "nearest_clean_same_class": 0.988,
+   "own_original_in_10": 0.954,
+   "clean_class_kept": 0.9532
+  },
+  "patch_shuffle": {
+   "mixing": 0.4954,
+   "class_kept": 0.9146,
+   "nearest_clean_same_class": 0.968,
+   "own_original_in_10": 0.898,
+   "clean_class_kept": 0.9454
+  },
+  "translation": {
+   "mixing": 0.5548,
+   "class_kept": 0.9334,
+   "nearest_clean_same_class": 1.0,
+   "own_original_in_10": 1.0,
+   "clean_class_kept": 0.9334
+  },
+  "cue_conflict": {
+   "mixing": 0.13227272727272726,
+   "class_kept": 0.5668181818181818,
+   "nearest_clean_same_class": 0.35454545454545455,
+   "own_original_in_10": 0.22727272727272727,
+   "clean_class_kept": 0.9113636363636364
+  }
+ },
+ "vit_b16": {
+  "grayscale": {
+   "mixing": 0.5336,
+   "class_kept": 0.9412,
+   "nearest_clean_same_class": 0.99,
+   "own_original_in_10": 0.96,
+   "clean_class_kept": 0.9514
+  },
+  "patch_shuffle": {
+   "mixing": 0.513,
+   "class_kept": 0.9056,
+   "nearest_clean_same_class": 0.978,
+   "own_original_in_10": 0.9,
+   "clean_class_kept": 0.928
+  },
+  "translation": {
+   "mixing": 0.5548,
+   "class_kept": 0.9384,
+   "nearest_clean_same_class": 1.0,
+   "own_original_in_10": 1.0,
+   "clean_class_kept": 0.9396
+  },
+  "cue_conflict": {
+   "mixing": 0.4022727272727273,
+   "class_kept": 0.7336363636363636,
+   "nearest_clean_same_class": 0.7772727272727272,
+   "own_original_in_10": 0.65,
+   "clean_class_kept": 0.9140909090909091
+  }
+ },
+ "clip_b32": {
+  "grayscale": {
+   "mixing": 0.476,
+   "class_kept": 0.9374,
+   "nearest_clean_same_class": 0.972,
+   "own_original_in_10": 0.894,
+   "clean_class_kept": 0.959
+  },
+  "patch_shuffle": {
+   "mixing": 0.0048,
+   "class_kept": 0.7546,
+   "nearest_clean_same_class": 0.264,
+   "own_original_in_10": 0.056,
+   "clean_class_kept": 0.9466
+  },
+  "translation": {
+   "mixing": 0.5536,
+   "class_kept": 0.9584,
+   "nearest_clean_same_class": 1.0,
+   "own_original_in_10": 1.0,
+   "clean_class_kept": 0.9592
+  },
+  "cue_conflict": {
+   "mixing": 0.023636363636363636,
+   "class_kept": 0.7195454545454546,
+   "nearest_clean_same_class": 0.24545454545454545,
+   "own_original_in_10": 0.1409090909090909,
+   "clean_class_kept": 0.9690909090909091
+  }
+ }
+}

@@ -86,6 +86,8 @@
     {
       "shift_px": 0,
       "accuracy": 0.972,
+      "consistency": 1.0,
+      "cosine_stability": 1.0,
       "n_directions": 1
     },
     {
@@ -96,7 +98,15 @@
         0.976,
         0.972,
         0.962
-      ]
+      ],
+      "consistency": 0.9744999999999999,
+      "per_direction_consistency": [
+        0.98,
+        0.97,
+        0.978,
+        0.97
+      ],
+      "cosine_stability": 0.9804860184974807
     },
     {
       "shift_px": 16,
@@ -106,7 +116,15 @@
         0.97,
         0.964,
         0.96
-      ]
+      ],
+      "consistency": 0.9715,
+      "per_direction_consistency": [
+        0.978,
+        0.974,
+        0.968,
+        0.966
+      ],
+      "cosine_stability": 0.9676211307397293
     },
     {
       "shift_px": 32,
@@ -116,7 +134,15 @@
         0.964,
         0.972,
         0.964
-      ]
+      ],
+      "consistency": 0.9674999999999999,
+      "per_direction_consistency": [
+        0.968,
+        0.97,
+        0.968,
+        0.964
+      ],
+      "cosine_stability": 0.9694608396727382
     }
   ],
   "cue_conflict": {
@@ -128,6 +154,49 @@
     "coverage": 79.54545454545455,
     "mean_max_confidence": 0.12538065016269684,
     "cosine_stability_vs_content_source": 0.7083664099010707
+  },
+  "clip_zero_shot_vs_head": {
+    "clean": {
+      "accuracy": 0.978,
+      "macro_f1": 0.9779585624497706,
+      "mean_max_confidence": 0.9482836127281189,
+      "prediction_consistency": null,
+      "accuracy_change_vs_clean": null,
+      "agreement_with_head": 0.978
+    },
+    "grayscale": {
+      "accuracy": 0.944,
+      "macro_f1": 0.9434285570962284,
+      "mean_max_confidence": 0.9243713617324829,
+      "prediction_consistency": 0.952,
+      "accuracy_change_vs_clean": -0.03400000000000003,
+      "agreement_with_head": 0.956
+    },
+    "extra_color": {
+      "accuracy": 0.95,
+      "macro_f1": 0.9495855770550552,
+      "mean_max_confidence": 0.9232834577560425,
+      "prediction_consistency": 0.946,
+      "accuracy_change_vs_clean": -0.028000000000000025,
+      "agreement_with_head": 0.956
+    },
+    "patch_shuffle": {
+      "accuracy": 0.836,
+      "macro_f1": 0.8352948399008595,
+      "mean_max_confidence": 0.8394384980201721,
+      "prediction_consistency": 0.834,
+      "accuracy_change_vs_clean": -0.14200000000000002,
+      "agreement_with_head": 0.888
+    },
+    "cue_conflict": {
+      "n_shape": 181,
+      "n_texture": 2,
+      "n_other": 37,
+      "n_total": 220,
+      "shape_bias": 98.90710382513662,
+      "coverage": 83.18181818181819,
+      "agreement_with_head": 0.8363636363636363
+    }
   },
   "cosine_stability": {
     "grayscale": 0.9001315023796886,

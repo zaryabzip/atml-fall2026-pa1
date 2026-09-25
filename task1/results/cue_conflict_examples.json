@@ -1,0 +1,81 @@
+{
+  "counts": {
+    "models disagree": 92,
+    "all follow texture": 0,
+    "all predict neither": 12
+  },
+  "examples": [
+    {
+      "group": "models disagree",
+      "path": "cat_shape_car_texture_2893_1987.jpg",
+      "shape": "cat",
+      "texture": "car",
+      "resnet50": "bird",
+      "vit_b16": "cat",
+      "clip_b32": "car"
+    },
+    {
+      "group": "models disagree",
+      "path": "car_shape_cat_texture_2107_2445.jpg",
+      "shape": "car",
+      "texture": "cat",
+      "resnet50": "cat",
+      "vit_b16": "car",
+      "clip_b32": "car"
+    },
+    {
+      "group": "models disagree",
+      "path": "dog_shape_bird_texture_4355_1096.jpg",
+      "shape": "dog",
+      "texture": "bird",
+      "resnet50": "bird",
+      "vit_b16": "dog",
+      "clip_b32": "dog"
+    },
+    {
+      "group": "models disagree",
+      "path": "horse_shape_airplane_texture_5521_343.jpg",
+      "shape": "horse",
+      "texture": "airplane",
+      "resnet50": "bird",
+      "vit_b16": "airplane",
+      "clip_b32": "deer"
+    },
+    {
+      "group": "all predict neither",
+      "path": "cat_shape_car_texture_2411_2009.jpg",
+      "shape": "cat",
+      "texture": "car",
+      "resnet50": "deer",
+      "vit_b16": "monkey",
+      "clip_b32": "monkey"
+    },
+    {
+      "group": "all predict neither",
+      "path": "dog_shape_bird_texture_4701_1252.jpg",
+      "shape": "dog",
+      "texture": "bird",
+      "resnet50": "deer",
+      "vit_b16": "deer",
+      "clip_b32": "monkey"
+    },
+    {
+      "group": "all predict neither",
+      "path": "airplane_shape_horse_texture_733_5244.jpg",
+      "shape": "airplane",
+      "texture": "horse",
+      "resnet50": "bird",
+      "vit_b16": "monkey",
+      "clip_b32": "bird"
+    },
+    {
+      "group": "all predict neither",
+      "path": "horse_shape_airplane_texture_5273_711.jpg",
+      "shape": "horse",
+      "texture": "airplane",
+      "resnet50": "bird",
+      "vit_b16": "deer",
+      "clip_b32": "bird"
+    }
+  ]
+}

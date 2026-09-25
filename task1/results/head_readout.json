@@ -1,0 +1,80 @@
+{
+ "resnet50": {
+  "grayscale": {
+   "share_read": 0.013967808336019516,
+   "random_share": 0.00439453125,
+   "clean_margin_median": 3.4758665561676025,
+   "margin_kept_median": 0.9999957084655762,
+   "flipped_clean_margin_median": 1.6300997734069824,
+   "kept_clean_margin_median": 3.5631983280181885
+  },
+  "hue": {
+   "share_read": 0.020511386916041374,
+   "random_share": 0.00439453125,
+   "clean_margin_median": 3.4758665561676025,
+   "margin_kept_median": 0.9796050786972046,
+   "flipped_clean_margin_median": 1.4269773960113525,
+   "kept_clean_margin_median": 3.56423020362854
+  },
+  "shuffle": {
+   "share_read": 0.030390098690986633,
+   "random_share": 0.00439453125,
+   "clean_margin_median": 3.4758665561676025,
+   "margin_kept_median": 0.9872744679450989,
+   "flipped_clean_margin_median": 2.178957939147949,
+   "kept_clean_margin_median": 3.5835137367248535
+  }
+ },
+ "vit_b16": {
+  "grayscale": {
+   "share_read": 0.021836822852492332,
+   "random_share": 0.01171875,
+   "clean_margin_median": 5.867408275604248,
+   "margin_kept_median": 1.0284744501113892,
+   "flipped_clean_margin_median": 2.349339008331299,
+   "kept_clean_margin_median": 5.906813621520996
+  },
+  "hue": {
+   "share_read": 0.02292674593627453,
+   "random_share": 0.01171875,
+   "clean_margin_median": 5.867408275604248,
+   "margin_kept_median": 0.9827172756195068,
+   "flipped_clean_margin_median": 1.7972323894500732,
+   "kept_clean_margin_median": 5.913229942321777
+  },
+  "shuffle": {
+   "share_read": 0.033835019916296005,
+   "random_share": 0.01171875,
+   "clean_margin_median": 5.867408275604248,
+   "margin_kept_median": 0.6744698882102966,
+   "flipped_clean_margin_median": 3.266080856323242,
+   "kept_clean_margin_median": 5.948431968688965
+  }
+ },
+ "clip_b32": {
+  "grayscale": {
+   "share_read": 0.026869095861911774,
+   "random_share": 0.017578125,
+   "clean_margin_median": 0.24305641651153564,
+   "margin_kept_median": 0.9286453127861023,
+   "flipped_clean_margin_median": 0.05995388329029083,
+   "kept_clean_margin_median": 0.2475864589214325
+  },
+  "hue": {
+   "share_read": 0.033200398087501526,
+   "random_share": 0.017578125,
+   "clean_margin_median": 0.24305641651153564,
+   "margin_kept_median": 0.8929675817489624,
+   "flipped_clean_margin_median": 0.042262934148311615,
+   "kept_clean_margin_median": 0.2474927306175232
+  },
+  "shuffle": {
+   "share_read": 0.04916124418377876,
+   "random_share": 0.017578125,
+   "clean_margin_median": 0.24305641651153564,
+   "margin_kept_median": 0.532031774520874,
+   "flipped_clean_margin_median": 0.1791994422674179,
+   "kept_clean_margin_median": 0.2501417100429535
+  }
+ }
+}

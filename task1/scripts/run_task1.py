@@ -122,17 +122,20 @@ def run_translation_curve(backbone, head, eval_x, eval_y, clean_pred, clean_feat
     for shift in shifts:
         if shift == 0:  # a 0px "shift" is just the clean image again, so reuse work already done
             clean_accuracy = float((clean_pred == eval_y).mean())
-            curve.append({"shift_px": 0, "accuracy": clean_accuracy, "n_directions": 1})
+            curve.append({"shift_px": 0, "accuracy": clean_accuracy, "consistency": 1.0, "cosine_stability": 1.0,
+                          "n_directions": 1})
             continue
 
         # Test this shift magnitude in all 4 cardinal directions, averaging the accuracy.
         directions = [(shift, 0), (-shift, 0), (0, shift), (0, -shift)]  # right, left, down, up
-        direction_accuracies = []
+        direction_accuracies, direction_consistencies, direction_cosines = [], [], []
         for dx, dy in directions:
             shifted_x = translate(eval_x, dx, dy)
             feats = features_from_tensor(backbone, shifted_x, device, feature_batch)
             pred = head_probabilities(head, feats, device).argmax(axis=1)
             direction_accuracies.append(float((pred == eval_y).mean()))
+            direction_consistencies.append(float((pred == clean_pred).mean()))  # prediction unchanged vs clean
+            direction_cosines.append(cosine_stability(clean_feats, feats))
             if shift == max_shift:  # keep features at the largest shift for cosine stability + the plot
                 max_shift_feats.append(feats)
 
@@ -140,6 +143,9 @@ def run_translation_curve(backbone, head, eval_x, eval_y, clean_pred, clean_feat
             "shift_px": shift,
             "accuracy": float(np.mean(direction_accuracies)),
             "per_direction_accuracy": direction_accuracies,
+            "consistency": float(np.mean(direction_consistencies)),
+            "per_direction_consistency": direction_consistencies,
+            "cosine_stability": float(np.mean(direction_cosines)),
         })
 
     # Cosine stability at the largest shift, averaged over its 4 directions.
@@ -189,13 +195,16 @@ def run_cue_conflict_eval(backbone, head, device, feature_batch, classes):
     # If the source (un-stylized) image ids were recorded, also measure how far the representation
     # moved from that original content photo.
     has_source_ids = all("source_image_id" in m for m in meta)
+    content_feats = None
     if has_source_ids:
         source_ids = [m["source_image_id"] for m in meta]
         content_x, _ = load_split_tensors("test", source_ids, feature_batch)
         content_feats = features_from_tensor(backbone, content_x, device, feature_batch)
         bias["cosine_stability_vs_content_source"] = cosine_stability(content_feats, feats)
 
-    return bias, feats, content_labels  # score dict, raw features, and shape labels (for coloring the t-SNE plot)
+    paths = [m["path"] for m in meta]
+    # scores, features, shape/texture labels, head predictions, source-photo features, image file names
+    return bias, feats, content_labels, style_labels, pred, content_feats, paths
 
 
 # ---------------------------------------------------------------------------
@@ -273,24 +282,24 @@ def save_translation_curve_plot(all_reports: dict, path) -> None:
     not just numbers in the JSON, so every backbone's translation robustness is visible at a glance."""
     import matplotlib.pyplot as plt
 
-    fig, ax = plt.subplots(figsize=(7, 4.5))
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
     fig.patch.set_facecolor("white")
     markers = ("o", "s", "^")  # a different marker shape per backbone, in addition to color
 
-    for i, (backbone_name, report) in enumerate(all_reports.items()):
-        curve = report["translation_curve"]
-        shifts = [point["shift_px"] for point in curve]
-        accuracies = [100.0 * point["accuracy"] for point in curve]
-        ax.plot(shifts, accuracies, marker=markers[i % len(markers)], markersize=7, linewidth=2.2,
-               color=PLOT_PALETTE[i % len(PLOT_PALETTE)], label=backbone_name)
-
-    ax.set_xlabel("translation (pixels)", fontsize=11)
-    ax.set_ylabel("accuracy (%)", fontsize=11)
-    ax.set_title("Accuracy vs. translation, averaged over 4 directions", fontsize=13, fontweight="bold")
-    ax.grid(True, alpha=0.25, linewidth=0.7)
-    ax.legend(frameon=True, framealpha=0.9, fontsize=10)
-    for spine in ("top", "right"):
-        ax.spines[spine].set_visible(False)
+    for ax, key, ylabel in zip(axes, ("accuracy", "consistency"), ("accuracy (%)", "prediction consistency (%)")):
+        for i, (backbone_name, report) in enumerate(all_reports.items()):
+            curve = report["translation_curve"]
+            shifts = [point["shift_px"] for point in curve]
+            values = [100.0 * point[key] for point in curve]
+            ax.plot(shifts, values, marker=markers[i % len(markers)], markersize=7, linewidth=2.2,
+                    color=PLOT_PALETTE[i % len(PLOT_PALETTE)], label=backbone_name)
+        ax.set_xlabel("translation (pixels)", fontsize=11)
+        ax.set_ylabel(ylabel, fontsize=11)
+        ax.grid(True, alpha=0.25, linewidth=0.7)
+        for spine in ("top", "right"):
+            ax.spines[spine].set_visible(False)
+    axes[0].legend(frameon=True, framealpha=0.9, fontsize=10)
+    fig.suptitle("Translation, averaged over 4 directions", fontsize=13, fontweight="bold")
     fig.tight_layout()
     save_figure(fig, path, dpi=220)
 
@@ -305,7 +314,8 @@ def save_projection(backbone_name, transform_name, clean_feats, transformed_feat
         f"save_projection({transform_name}): {len(transformed_feats)} feature rows but "
         f"{len(labels)} labels -- pass the labels that actually match these images."
     )
-    matched_clean_feats = clean_feats[:len(transformed_feats)]
+    assert len(clean_feats) == len(transformed_feats), f"save_projection({transform_name}): clean/transformed rows differ"
+    matched_clean_feats = clean_feats
 
     # Fit the projection, then save both the plot and the raw coordinates/settings.
     proj = joint_projection(matched_clean_feats, transformed_feats, labels, method, seed, **settings)
@@ -337,6 +347,30 @@ def run_clip_zero_shot(backbone, cfg, device, feature_batch, eval_x, eval_y, cle
     return prediction_report(eval_y, pred, probs)
 
 
+def compare_zero_shot_and_head(backbone, cfg, device, eval_y, conditions: dict, cue) -> dict:
+    """For each condition: zero-shot accuracy / consistency (vs zero-shot on clean) and how often zero-shot and the
+    trained head predict the same class. On cue conflicts: zero-shot shape bias and coverage."""
+    text_feats, logit_scale = clip_zero_shot_text(backbone, STL10_CLASSES, cfg["clip_zero_shot"]["template"], device)
+
+    def zero_shot_probs(feats):
+        logits = logit_scale.item() * (torch.from_numpy(feats).to(device) @ text_feats.T.to(device))
+        return F.softmax(logits, dim=1).cpu().numpy()
+
+    clean_zs_pred = zero_shot_probs(conditions["clean"][0]).argmax(axis=1)
+    out = {}
+    for name, (feats, head_pred) in conditions.items():
+        probs = zero_shot_probs(feats)
+        pred = probs.argmax(axis=1)
+        out[name] = prediction_report(eval_y, pred, probs, pred_clean=None if name == "clean" else clean_zs_pred)
+        out[name]["agreement_with_head"] = float((pred == np.asarray(head_pred)).mean())
+    if cue is not None:
+        cue_feats, content_labels, style_labels, head_pred = cue
+        pred = zero_shot_probs(cue_feats).argmax(axis=1)
+        out["cue_conflict"] = shape_bias(pred, content_labels, style_labels)
+        out["cue_conflict"]["agreement_with_head"] = float((pred == np.asarray(head_pred)).mean())
+    return out
+
+
 def run_backbone(backbone_name: str, cfg: dict, device) -> dict:
     """Run every Task 1 experiment for one backbone (e.g. resnet50) and save its report."""
     print(f"=== {backbone_name} ===")
@@ -365,7 +399,7 @@ def run_backbone(backbone_name: str, cfg: dict, device) -> dict:
     # Grayscale: removes all color, keeps shape and brightness.
     gray_x = to_grayscale(eval_x)
     gray_feats = features_from_tensor(backbone, gray_x, device, feature_batch)
-    gray_report, _, _ = evaluate_head(head, gray_feats, eval_y, device, pred_clean=clean_pred)
+    gray_report, gray_pred, _ = evaluate_head(head, gray_feats, eval_y, device, pred_clean=clean_pred)
     report["grayscale"] = gray_report
     cosine_gray = cosine_stability(clean_feats, gray_feats)
 
@@ -374,7 +408,7 @@ def run_backbone(backbone_name: str, cfg: dict, device) -> dict:
     color_kind = color_cfg.pop("kind")
     color_x = extra_color(eval_x, kind=color_kind, **color_cfg)
     color_feats = features_from_tensor(backbone, color_x, device, feature_batch)
-    color_report, _, _ = evaluate_head(head, color_feats, eval_y, device, pred_clean=clean_pred)
+    color_report, color_pred, _ = evaluate_head(head, color_feats, eval_y, device, pred_clean=clean_pred)
     report["extra_color"] = color_report
     cosine_color = cosine_stability(clean_feats, color_feats)
 
@@ -384,7 +418,7 @@ def run_backbone(backbone_name: str, cfg: dict, device) -> dict:
     generator = torch.Generator().manual_seed(cfg["seed"])
     shuffled_x, perms = patch_shuffle(eval_x, grid, generator)
     shuffled_feats = features_from_tensor(backbone, shuffled_x, device, feature_batch)
-    patch_report, _, _ = evaluate_head(head, shuffled_feats, eval_y, device, pred_clean=clean_pred)
+    patch_report, patch_pred, _ = evaluate_head(head, shuffled_feats, eval_y, device, pred_clean=clean_pred)
     report["patch_shuffle"] = patch_report
     cosine_patch = cosine_stability(clean_feats, shuffled_feats)
     save_json(perms.tolist(), RESULTS_DIR / backbone_name / "patch_shuffle_permutations.json")
@@ -400,8 +434,15 @@ def run_backbone(backbone_name: str, cfg: dict, device) -> dict:
     cue_result = run_cue_conflict_eval(backbone, head, device, feature_batch, STL10_CLASSES)
     cue_feats, cue_content_labels = None, None
     if cue_result is not None:
-        cue_report, cue_feats, cue_content_labels = cue_result
+        cue_report, cue_feats, cue_content_labels, cue_style_labels, cue_pred, cue_source_feats, cue_paths = cue_result
         report["cue_conflict"] = cue_report
+
+    # CLIP only: zero-shot decisions vs the trained head, on the same images under every intervention.
+    if backbone_name == "clip_b32":
+        conditions = {"clean": (clean_feats, clean_pred), "grayscale": (gray_feats, gray_pred),
+                      "extra_color": (color_feats, color_pred), "patch_shuffle": (shuffled_feats, patch_pred)}
+        cue = (cue_feats, cue_content_labels, cue_style_labels, cue_pred) if cue_result is not None else None
+        report["clip_zero_shot_vs_head"] = compare_zero_shot_and_head(backbone, cfg, device, eval_y, conditions, cue)
 
     # Collect every intervention's cosine stability into one place in the report.
     cue_cosine = report.get("cue_conflict", {}).get("cosine_stability_vs_content_source")
@@ -428,13 +469,81 @@ def run_backbone(backbone_name: str, cfg: dict, device) -> dict:
     if cue_feats is not None:  # only plot cue conflicts if they've been generated
         # colored by SHAPE class (content_class), not the eval-subset's true class -- cue-conflict
         # images are a different, smaller set of images with their own (shape, texture) labels.
-        save_projection(backbone_name, "cue_conflict", clean_feats, cue_feats, cue_content_labels, method, cfg["seed"], settings, STL10_CLASSES)
+        # the clean half is each cue conflict's own source (content) photo, so both halves are the same images
+        save_projection(backbone_name, "cue_conflict", cue_source_feats, cue_feats, cue_content_labels, method, cfg["seed"], settings, STL10_CLASSES)
+
+    # Per-image predictions (class indices), so agreements, mismatches and failures can be inspected per image.
+    predictions = {"eval_subset_ids": split_ids["eval_subset"], "true": eval_y.tolist(), "clean": clean_pred.tolist(),
+                   "grayscale": gray_pred.tolist(), "extra_color": color_pred.tolist(), "patch_shuffle": patch_pred.tolist()}
+    if cue_result is not None:
+        predictions["cue_conflict"] = {"path": cue_paths, "shape": cue_content_labels.tolist(),
+                                       "texture": cue_style_labels.tolist(), "pred": cue_pred.tolist()}
+    save_json(predictions, RESULTS_DIR / backbone_name / "predictions.json")
 
     # Save everything computed above to disk.
     report_path = RESULTS_DIR / backbone_name / "report.json"
     save_json(report, report_path)
     print(f"Saved {report_path}")
     return report
+
+
+def save_cue_conflict_examples(backbones, path, n_per_group: int = 4) -> None:
+    """Informative cue-conflict cases with every model's prediction: (1) models disagree, (2) every model follows the
+    texture, (3) every model predicts neither class. Picked after evaluation, for analysis only; written to JSON too."""
+    import matplotlib.pyplot as plt
+    from PIL import Image
+
+    preds = {b: load_json(RESULTS_DIR / b / "predictions.json").get("cue_conflict") for b in backbones}
+    if any(p is None for p in preds.values()):
+        return
+    first = preds[backbones[0]]
+    n = len(first["path"])
+
+    def outcome(b, i):
+        p = preds[b]["pred"][i]
+        return "shape" if p == first["shape"][i] else "texture" if p == first["texture"][i] else "other"
+
+    groups = {"models disagree": [], "all follow texture": [], "all predict neither": []}
+    for i in range(n):
+        outs = {outcome(b, i) for b in backbones}
+        if len(outs) > 1:
+            groups["models disagree"].append(i)
+        elif outs == {"texture"}:
+            groups["all follow texture"].append(i)
+        elif outs == {"other"}:
+            groups["all predict neither"].append(i)
+    # Spread examples over directions (shape/texture pairs); among disagreements prefer ones where a model follows texture.
+    def spread(idx, k):
+        idx = sorted(idx, key=lambda i: not any(outcome(b, i) == "texture" for b in backbones))
+        picked, seen = [], set()
+        for i in idx:
+            d = (first["shape"][i], first["texture"][i])
+            if d not in seen:
+                seen.add(d); picked.append(i)
+            if len(picked) == k:
+                break
+        return picked
+
+    chosen = [(g, i) for g, idx in groups.items() for i in spread(idx, n_per_group)]
+    save_json({"counts": {g: len(idx) for g, idx in groups.items()},
+               "examples": [{"group": g, "path": first["path"][i], "shape": STL10_CLASSES[first["shape"][i]],
+                             "texture": STL10_CLASSES[first["texture"][i]],
+                             **{b: STL10_CLASSES[preds[b]["pred"][i]] for b in backbones}} for g, i in chosen]},
+              path.with_suffix(".json"))
+    if not chosen:
+        return
+    cols = 4
+    rows = (len(chosen) + cols - 1) // cols
+    fig, axes = plt.subplots(rows, cols, figsize=(3.2 * cols, 4.3 * rows))
+    for ax in np.atleast_1d(axes).flat:
+        ax.axis("off")
+    for ax, (g, i) in zip(np.atleast_1d(axes).flat, chosen):
+        ax.imshow(Image.open(CUE_CONFLICT_DIR / "images" / first["path"][i]))
+        lines = [f"{g}", f"shape {STL10_CLASSES[first['shape'][i]]} / texture {STL10_CLASSES[first['texture'][i]]}"]
+        lines += [f"{b}: {STL10_CLASSES[preds[b]['pred'][i]]}" for b in backbones]
+        ax.set_title("\n".join(lines), fontsize=8)
+    fig.tight_layout()
+    save_figure(fig, path, dpi=160)
 
 
 def main():
@@ -460,6 +569,8 @@ def main():
 
     summary_path = RESULTS_DIR / "summary.json"
     save_json(all_reports, summary_path)
+
+    save_cue_conflict_examples(list(all_reports), RESULTS_DIR / "cue_conflict_examples.png")
 
     curve_path = RESULTS_DIR / "translation_curve.png"
     save_translation_curve_plot(all_reports, curve_path)

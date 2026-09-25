@@ -15,7 +15,7 @@ head:
 clip_zero_shot:
   template: "a photo of a {}."
 interventions:
-  extra_color: {kind: hue_rotation, hue_factor: 0.3}   # design choice: rotates hue, keeps shape/luminance/saturation
+  extra_color: {kind: hue_rotation, hue_factor: 0.3}   # design choice: rotates hue; keeps shape and saturation, brightness changes slightly
   translations: [0, 8, 16, 32]
   patch_grid: 4
 cue_conflict:

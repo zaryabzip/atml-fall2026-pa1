@@ -109,6 +109,8 @@
     {
       "shift_px": 0,
       "accuracy": 0.972,
+      "consistency": 1.0,
+      "cosine_stability": 1.0,
       "n_directions": 1
     },
     {
@@ -119,7 +121,15 @@
         0.972,
         0.976,
         0.97
-      ]
+      ],
+      "consistency": 0.988,
+      "per_direction_consistency": [
+        0.986,
+        0.992,
+        0.988,
+        0.986
+      ],
+      "cosine_stability": 0.9696035145873476
     },
     {
       "shift_px": 16,
@@ -129,7 +139,15 @@
         0.968,
         0.978,
         0.974
-      ]
+      ],
+      "consistency": 0.99,
+      "per_direction_consistency": [
+        0.99,
+        0.986,
+        0.994,
+        0.99
+      ],
+      "cosine_stability": 0.9542994693459731
     },
     {
       "shift_px": 32,
@@ -139,7 +157,15 @@
         0.96,
         0.97,
         0.97
-      ]
+      ],
+      "consistency": 0.9829999999999999,
+      "per_direction_consistency": [
+        0.978,
+        0.978,
+        0.99,
+        0.986
+      ],
+      "cosine_stability": 0.9342979733526918
     }
   ],
   "cue_conflict": {

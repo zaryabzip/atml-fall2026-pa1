@@ -1,0 +1,36 @@
+{
+  "curve": [
+    {
+      "shift_px": 0,
+      "zs_accuracy": 0.978,
+      "zs_consistency": 1.0,
+      "head_accuracy": 0.972,
+      "head_consistency": 1.0,
+      "agreement_with_head": 0.978
+    },
+    {
+      "shift_px": 8,
+      "zs_accuracy": 0.9690000000000001,
+      "zs_consistency": 0.9775,
+      "head_accuracy": 0.97,
+      "head_consistency": 0.9744999999999999,
+      "agreement_with_head": 0.9744999999999999
+    },
+    {
+      "shift_px": 16,
+      "zs_accuracy": 0.968,
+      "zs_consistency": 0.9715,
+      "head_accuracy": 0.967,
+      "head_consistency": 0.9715,
+      "agreement_with_head": 0.9689999999999999
+    },
+    {
+      "shift_px": 32,
+      "zs_accuracy": 0.9615,
+      "zs_consistency": 0.9694999999999999,
+      "head_accuracy": 0.968,
+      "head_consistency": 0.9674999999999999,
+      "agreement_with_head": 0.9715
+    }
+  ]
+}

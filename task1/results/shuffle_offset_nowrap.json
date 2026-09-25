@@ -1,0 +1,68 @@
+{
+  "resnet50": {
+    "16px aligned": {
+      "accuracy": 0.554,
+      "consistency": 0.57,
+      "cosine_stability": 0.4126670877232406
+    },
+    "16px mid-patch": {
+      "accuracy": 0.478,
+      "consistency": 0.488,
+      "cosine_stability": 0.35430519249008274
+    },
+    "32px aligned": {
+      "accuracy": 0.83,
+      "consistency": 0.848,
+      "cosine_stability": 0.6463728065494343
+    },
+    "32px mid-patch": {
+      "accuracy": 0.8,
+      "consistency": 0.812,
+      "cosine_stability": 0.6141963680389901
+    }
+  },
+  "vit_b16": {
+    "16px aligned": {
+      "accuracy": 0.648,
+      "consistency": 0.646,
+      "cosine_stability": 0.3371892891650616
+    },
+    "16px mid-patch": {
+      "accuracy": 0.288,
+      "consistency": 0.286,
+      "cosine_stability": 0.0905214062701116
+    },
+    "32px aligned": {
+      "accuracy": 0.904,
+      "consistency": 0.906,
+      "cosine_stability": 0.6633719429982391
+    },
+    "32px mid-patch": {
+      "accuracy": 0.876,
+      "consistency": 0.884,
+      "cosine_stability": 0.6480231975201272
+    }
+  },
+  "clip_b32": {
+    "16px aligned": {
+      "accuracy": 0.328,
+      "consistency": 0.328,
+      "cosine_stability": 0.5414153247508513
+    },
+    "16px mid-patch": {
+      "accuracy": 0.24,
+      "consistency": 0.242,
+      "cosine_stability": 0.557782034546444
+    },
+    "32px aligned": {
+      "accuracy": 0.822,
+      "consistency": 0.826,
+      "cosine_stability": 0.8583996731186746
+    },
+    "32px mid-patch": {
+      "accuracy": 0.49,
+      "consistency": 0.49,
+      "cosine_stability": 0.584431737827789
+    }
+  }
+}
