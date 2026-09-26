@@ -1,4 +1,4 @@
-# PA1: Beyond IID (ATML Fall 2026)
+# PA1: (ATML Fall 2026)
 
 Programming Assignment 1 for ATML (Fall 2026): how vision models behave beyond the IID setting. This repository contains Tasks 1 to 4.
 
